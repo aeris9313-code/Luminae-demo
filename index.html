@@ -1,0 +1,1746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luminae — DEMO (All Books Unlocked)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=Lato:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Cinzel:wght@400;500;600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --mint:#A8D5BA;
+  --mint-lt:#D6EFE1;
+  --mint-pale:#EEF8F3;
+  --blue:#A8C8E8;
+  --blue-lt:#D4E8F5;
+  --blue-pale:#EBF4FB;
+  --lav:#C4B5D8;
+  --lav-lt:#DDD4EE;
+  --lav-pale:#F0ECF8;
+  --peach:#F0C4A8;
+  --peach-lt:#F8DDD0;
+  --beige:#F5F0E8;
+  --beige2:#EDE8DF;
+  --white:#FFFFFF;
+  --ink:#1A1A2E;
+  --ink2:#3D3D5C;
+  --ink3:#6B6B8A;
+  --ink4:#9E9EB8;
+  --green:#2E8B57;
+  --green2:#3AA86A;
+  --shadow-sm:0 2px 12px rgba(0,0,0,0.06);
+  --shadow-md:0 8px 32px rgba(0,0,0,0.08);
+  --shadow-lg:0 16px 60px rgba(0,0,0,0.1);
+  --r-sm:12px;
+  --r-md:20px;
+  --r-lg:28px;
+  --r-xl:36px;
+}
+body{font-family:'Lato',sans-serif;background:var(--white);color:var(--ink);overflow-x:hidden;line-height:1.6;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-thumb{background:var(--mint);border-radius:3px;}
+img{max-width:100%;}
+
+
+
+/* ── HERO REVIEW CARD ── */
+.hero-review-card{margin-top:28px;background:white;border-radius:16px;padding:18px 22px;box-shadow:var(--shadow-md);max-width:360px;border-left:3px solid var(--mint);}
+.hero-review-stars{color:#F5A623;font-size:0.85rem;margin-bottom:6px;letter-spacing:2px;}
+.hero-review-text{font-size:0.82rem;color:var(--ink2);font-style:italic;line-height:1.6;font-family:'Playfair Display',serif;margin-bottom:6px;}
+.hero-review-author{font-size:0.68rem;color:var(--ink3);font-weight:600;font-family:'Poppins',sans-serif;letter-spacing:0.04em;}
+
+/* ── HERO PHOTOS ── */
+.hero-book-showcase{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start;}
+.hero-book-showcase .hbs-book{border-radius:4px 12px 12px 4px;overflow:hidden;cursor:pointer;
+  box-shadow:-3px 0 0 #C8B8A0,-5px 2px 8px rgba(0,0,0,0.2),0 12px 32px rgba(0,0,0,0.15);
+  transition:transform 0.3s,box-shadow 0.3s;aspect-ratio:2/3;}
+.hero-book-showcase .hbs-book:hover{transform:translateY(-6px);box-shadow:-3px 0 0 #C8B8A0,-5px 2px 8px rgba(0,0,0,0.25),0 20px 48px rgba(0,0,0,0.22);}
+.hero-book-showcase .hbs-book:nth-child(2){margin-top:32px;}
+.hero-book-showcase .hbs-book:nth-child(3){margin-top:-16px;}
+.hbs-inner{width:100%;height:100%;display:flex;flex-direction:column;}
+.hbs-art{flex:0 0 52%;display:flex;align-items:center;justify-content:center;position:relative;font-size:2.4rem;}
+.hbs-art-fade{position:absolute;bottom:0;left:0;right:0;height:45%;}
+.hbs-text{flex:1;display:flex;flex-direction:column;padding:10px 12px 12px;}
+.hbs-rule{width:20px;height:1.5px;margin-bottom:6px;}
+.hbs-cat{font-family:'Cinzel',serif;font-size:0.36rem;letter-spacing:0.26em;text-transform:uppercase;opacity:0.5;margin-bottom:4px;}
+.hbs-title{font-family:'Cormorant Garamond',serif;font-size:0.82rem;font-weight:600;line-height:1.2;margin-bottom:3px;}
+.hbs-price{font-family:'Cinzel',serif;font-size:0.5rem;font-weight:600;letter-spacing:0.04em;opacity:0.7;margin-top:auto;}
+@media(max-width:960px){.hero-book-showcase{display:none;}}
+
+/* ─── NAV ─── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 64px;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(168,213,186,0.2);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-pill{background:linear-gradient(135deg,var(--mint),var(--blue));width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-weight:800;font-size:0.9rem;color:white;letter-spacing:-0.5px;}
+.nav-logo-text{font-family:'Poppins',sans-serif;font-weight:700;font-size:1.05rem;color:var(--ink);}
+.nav-logo-text span{color:var(--green);}
+.nav-links{display:flex;gap:4px;}
+.nav-link{font-size:0.82rem;font-weight:500;color:var(--ink3);padding:7px 14px;border-radius:20px;text-decoration:none;transition:all 0.2s;font-family:'Poppins',sans-serif;}
+.nav-link:hover{color:var(--ink);background:var(--mint-pale);}
+.nav-right{display:flex;align-items:center;gap:10px;}
+.nav-search{width:36px;height:36px;border-radius:50%;background:var(--beige);border:none;cursor:pointer;color:var(--ink3);font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+.nav-search:hover{background:var(--mint-lt);color:var(--green);}
+.nav-cta{background:var(--green);color:white;border:none;padding:9px 22px;border-radius:24px;font-size:0.8rem;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif;transition:all 0.25s;box-shadow:0 4px 14px rgba(46,139,87,0.25);}
+.nav-cta:hover{background:var(--ink);transform:translateY(-1px);}
+.nav-user-area{display:flex;align-items:center;gap:8px;}
+.nav-email{font-size:0.76rem;color:var(--ink3);max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:'Poppins',sans-serif;}
+.nav-lib{background:var(--green);color:white;border:none;padding:8px 18px;border-radius:20px;font-size:0.78rem;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif;transition:all 0.2s;}
+.nav-lib:hover{background:var(--ink);}
+.nav-out{background:none;border:1.5px solid var(--beige2);color:var(--ink3);padding:7px 14px;border-radius:20px;font-size:0.76rem;cursor:pointer;font-family:'Poppins',sans-serif;transition:all 0.2s;}
+.nav-out:hover{border-color:var(--ink3);}
+.ham{display:none;background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--ink);}
+.mob-nav{display:none;position:fixed;top:72px;left:0;right:0;z-index:199;background:white;border-bottom:1px solid var(--beige2);flex-direction:column;box-shadow:var(--shadow-md);}
+.mob-nav.open{display:flex;}
+.mob-lnk{padding:14px 28px;font-size:0.9rem;color:var(--ink);border-bottom:1px solid var(--beige);text-decoration:none;font-family:'Poppins',sans-serif;}
+@media(max-width:768px){.nav-links{display:none;}.nav{padding:0 20px;}.ham{display:block;}}
+
+/* ─── HERO ─── */
+.hero{min-height:100vh;display:flex;align-items:center;padding:136px 64px 80px;position:relative;overflow:hidden;background:linear-gradient(160deg,#FDFAF6 0%,#F7F2EA 40%,#F2EDE4 70%,#F8F2EC 100%);}
+.hero-blob1{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(168,213,186,0.35) 0%,transparent 70%);top:-100px;right:-100px;pointer-events:none;}
+.hero-blob2{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(168,200,232,0.3) 0%,transparent 70%);bottom:-80px;left:-80px;pointer-events:none;}
+.hero-blob3{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(196,181,216,0.2) 0%,transparent 70%);top:40%;right:30%;pointer-events:none;}
+.hero-inner{position:relative;z-index:2;max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:center;width:100%;}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:white;border:1.5px solid var(--mint-lt);padding:6px 16px;border-radius:24px;font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);margin-bottom:24px;box-shadow:var(--shadow-sm);}
+.hero-tag-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.8);}}
+.hero-h1{font-family:'Poppins',sans-serif;font-size:clamp(2.6rem,5vw,4.2rem);font-weight:800;line-height:1.08;color:var(--ink);margin-bottom:22px;letter-spacing:-0.03em;}
+.hero-h1 em{font-style:normal;background:linear-gradient(135deg,var(--green),#5BC4A0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{font-size:1rem;color:var(--ink3);line-height:1.75;margin-bottom:40px;max-width:480px;font-weight:400;}
+.hero-btns{display:flex;gap:14px;align-items:center;margin-bottom:52px;flex-wrap:wrap;}
+.btn-hero{background:linear-gradient(135deg,var(--green),#4DB87A);color:white;border:none;padding:15px 36px;border-radius:28px;font-size:0.88rem;font-weight:700;cursor:pointer;font-family:'Poppins',sans-serif;letter-spacing:0.02em;transition:all 0.3s;box-shadow:0 8px 28px rgba(46,139,87,0.3);}
+.btn-hero:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(46,139,87,0.4);}
+.btn-hero2{background:white;color:var(--ink);border:1.5px solid var(--beige2);padding:14px 28px;border-radius:28px;font-size:0.88rem;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif;transition:all 0.25s;box-shadow:var(--shadow-sm);}
+.btn-hero2:hover{border-color:var(--mint);transform:translateY(-1px);}
+.hero-trust{display:flex;gap:28px;flex-wrap:wrap;}
+.hero-trust-item{display:flex;align-items:center;gap:8px;font-size:0.78rem;color:var(--ink3);}
+.hero-trust-icon{width:30px;height:30px;background:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.85rem;box-shadow:var(--shadow-sm);}
+/* HERO CARDS */
+.hero-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;position:relative;}
+.hero-card{border-radius:var(--r-lg);overflow:hidden;cursor:pointer;transition:all 0.35s cubic-bezier(0.34,1.56,0.64,1);box-shadow:var(--shadow-md);}
+.hero-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:var(--shadow-lg);}
+.hero-card:nth-child(2){margin-top:28px;}
+.hero-card:nth-child(3){margin-top:-14px;}
+.hc-inner{padding:24px 20px;height:180px;display:flex;flex-direction:column;justify-content:space-between;}
+.hc-top{display:flex;align-items:center;justify-content:space-between;}
+.hc-cat{font-size:0.5rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:rgba(80,60,50,0.45);font-family:'Poppins',sans-serif;}.hc-icon-center{font-size:2rem;text-align:center;margin:8px 0;}.hc-tagline{font-size:0.6rem;font-style:italic;color:rgba(80,60,50,0.5);font-family:'Playfair Display',serif;margin-top:3px;}
+.hc-icon{font-size:1.8rem;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.15));}
+.hc-title{font-family:'Playfair Display',serif;font-size:0.88rem;font-weight:700;color:rgba(50,38,30,0.9);line-height:1.3;margin-bottom:4px;}
+.hc-price{font-size:0.64rem;color:rgba(80,60,50,0.5);font-weight:500;margin-top:6px;}
+@media(max-width:900px){.hero-inner{grid-template-columns:1fr;}.hero-cards{display:none;}.hero{padding:110px 24px 80px;}}
+
+/* ─── SECTION ─── */
+.section{padding:96px 64px;}
+@media(max-width:768px){.section{padding:72px 20px;}}
+.sec-center{text-align:center;margin-bottom:56px;}
+.sec-pill{display:inline-flex;align-items:center;gap:6px;background:var(--mint-pale);color:var(--green);padding:5px 16px;border-radius:20px;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;font-family:'Poppins',sans-serif;}
+.sec-h2{font-family:'Poppins',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;color:var(--ink);line-height:1.15;letter-spacing:-0.02em;margin-bottom:14px;}
+.sec-h2 em{font-style:normal;color:var(--green);}
+.sec-sub{font-size:0.95rem;color:var(--ink3);max-width:520px;margin:0 auto;line-height:1.75;}
+
+/* ─── FILTERS ─── */
+.filter-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:40px;flex-wrap:wrap;gap:12px;}
+.filter-group{display:flex;gap:8px;flex-wrap:wrap;}
+.f-btn{background:white;border:1.5px solid var(--beige2);color:var(--ink3);padding:8px 18px;border-radius:24px;font-size:0.78rem;font-weight:500;cursor:pointer;font-family:'Poppins',sans-serif;transition:all 0.2s;box-shadow:var(--shadow-sm);}
+.f-btn:hover{border-color:var(--mint);color:var(--green);}
+.f-btn.on{background:linear-gradient(135deg,var(--green),#4DB87A);color:white;border-color:transparent;box-shadow:0 4px 16px rgba(46,139,87,0.25);}
+.f-search{display:flex;align-items:center;gap:8px;background:white;border:1.5px solid var(--beige2);color:var(--ink3);padding:8px 18px;border-radius:24px;font-size:0.78rem;font-weight:500;cursor:pointer;font-family:'Poppins',sans-serif;transition:all 0.2s;box-shadow:var(--shadow-sm);}
+.f-search:hover{border-color:var(--mint);color:var(--green);}
+
+/* ─── BOOK CARDS ─── */
+.books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:28px;}
+.bcard{cursor:pointer;transition:all 0.35s cubic-bezier(0.34,1.56,0.64,1);}
+.bcard:hover{transform:translateY(-10px);}
+.bcard:hover .bcard-cover{box-shadow:0 24px 60px rgba(0,0,0,0.14);}
+
+/* CANVA-STYLE COVER */
+.bcard-cover{aspect-ratio:2/3;border-radius:4px 12px 12px 4px;overflow:hidden;position:relative;box-shadow:-4px 0 0 #C8B8A0,-6px 2px 8px rgba(0,0,0,0.2),0 12px 40px rgba(0,0,0,0.12);transition:box-shadow 0.4s ease;width:100%;}
+.bcard-cover-bg{position:absolute;inset:0;}
+/* Soft geometric shapes */
+.bcard-cover-circle1{position:absolute;width:140%;height:140%;border-radius:50%;top:-70%;left:-20%;opacity:0.12;}
+.bcard-cover-circle2{position:absolute;width:100%;height:100%;border-radius:50%;bottom:-50%;right:-30%;opacity:0.08;}
+/* wavy line decoration */
+.bcard-cover-wave{position:absolute;bottom:0;left:0;right:0;height:35%;opacity:0.07;}
+.bcard-cover-content{position:absolute;inset:0;display:flex;flex-direction:column;padding:0;}
+.bcc-top-bar{display:flex;align-items:center;justify-content:center;padding:14px 0 0;margin-bottom:auto;}
+.bcc-luminae-top{font-size:0.48rem;font-weight:600;letter-spacing:0.28em;text-transform:uppercase;color:rgba(80,60,50,0.38);font-family:'Poppins',sans-serif;margin-bottom:3px;}
+.bcc-center-icon{font-size:2.8rem;text-align:center;display:block;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.08));margin-bottom:8px;}
+.bcc-arch{width:70%;height:90px;border:1.5px solid rgba(80,60,50,0.12);border-bottom:none;border-radius:50% 50% 0 0;margin:0 auto 0;margin-top:-50px;}
+.bcc-bottom{padding:0 16px 0;text-align:center;flex:1;display:flex;flex-direction:column;justify-content:flex-end;}
+.bcc-cat-line{font-size:0.5rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:rgba(80,60,50,0.45);margin-bottom:6px;font-family:'Poppins',sans-serif;}
+.bcc-main-title{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:rgba(50,38,30,0.92);line-height:1.25;letter-spacing:0.01em;}
+.bcc-thin-rule{width:28px;height:1px;background:rgba(80,60,50,0.25);margin:8px auto;}
+.bcc-sub-tag{font-size:0.55rem;font-style:italic;color:rgba(80,60,50,0.5);font-family:'Playfair Display',serif;line-height:1.45;}
+.bcc-price-row{display:flex;align-items:center;justify-content:center;padding:8px 0 12px;}
+.bcc-price-clean{font-size:0.64rem;font-weight:600;color:rgba(80,60,50,0.55);font-family:'Poppins',sans-serif;letter-spacing:0.06em;background:rgba(80,60,50,0.07);padding:3px 10px;border-radius:8px;}
+
+/* ── COVER PHOTOS ── */
+.bcard-cover-photo{position:absolute;top:0;left:0;right:0;height:58%;overflow:hidden;}
+.bcard-cover-photo img{width:100%;height:100%;object-fit:cover;filter:brightness(0.96) saturate(0.85);}
+.bcard-cover-photo::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to bottom,transparent,var(--cover-bg,#DDD0C0));}
+.bcard-cover-bottom{position:absolute;bottom:0;left:0;right:0;height:46%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 14px 12px;text-align:center;}
+
+
+/* ══ CSS PHOTO ART — no external URLs needed ══ */
+
+/* HERO MAIN PHOTO — woman meditating feel */
+.hero-css-photo{width:100%;height:100%;position:relative;overflow:hidden;}
+.hero-css-photo-main{
+  background:
+    radial-gradient(ellipse 60% 80% at 50% 30%, rgba(210,185,160,0.9) 0%, transparent 60%),
+    radial-gradient(ellipse 100% 60% at 50% 100%, rgba(180,155,130,0.8) 0%, transparent 50%),
+    linear-gradient(160deg, #C8B49A 0%, #D4C0A8 30%, #BFA88C 60%, #A89070 100%);
+}
+.hero-css-photo-main::before{
+  content:'';position:absolute;
+  width:110px;height:160px;
+  background:radial-gradient(ellipse at 50% 30%, rgba(235,215,195,0.95) 0%, rgba(210,185,160,0.6) 60%, transparent 100%);
+  border-radius:60% 60% 40% 40%;
+  top:15%;left:50%;transform:translateX(-50%);
+  box-shadow:0 8px 32px rgba(120,90,60,0.2);
+}
+.hero-css-photo-main::after{
+  content:'✿';
+  position:absolute;bottom:18%;left:50%;transform:translateX(-50%);
+  font-size:2.5rem;opacity:0.25;color:#7A5C3A;
+}
+
+/* HERO SMALL PHOTO 1 — food/bowl feel */
+.hero-css-photo-sm1{
+  background:
+    radial-gradient(circle at 50% 50%, rgba(200,170,130,0.9) 0%, rgba(160,130,100,0.7) 40%, transparent 70%),
+    linear-gradient(135deg, #D4B896 0%, #C4A882 40%, #B89870 100%);
+}
+.hero-css-photo-sm1::before{
+  content:'';position:absolute;
+  width:60px;height:60px;border-radius:50%;
+  background:radial-gradient(circle, rgba(240,220,195,0.9) 0%, rgba(210,180,145,0.5) 60%, transparent 100%);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  box-shadow:0 4px 20px rgba(120,90,60,0.25),inset 0 2px 8px rgba(255,240,220,0.4);
+}
+
+/* HERO SMALL PHOTO 2 — journal/writing feel */
+.hero-css-photo-sm2{
+  background:
+    linear-gradient(170deg, #E8DDD0 0%, #D4C8B8 40%, #C8B8A4 100%);
+}
+.hero-css-photo-sm2::before{
+  content:'';position:absolute;
+  width:70%;height:2px;background:rgba(120,95,70,0.2);
+  top:40%;left:15%;border-radius:1px;
+  box-shadow:0 8px 0 rgba(120,95,70,0.15),0 16px 0 rgba(120,95,70,0.1),0 24px 0 rgba(120,95,70,0.08);
+}
+.hero-css-photo-sm2::after{
+  content:'✒';position:absolute;top:25%;right:20%;
+  font-size:1.4rem;opacity:0.3;color:#7A5C3A;transform:rotate(20deg);
+}
+
+/* ABOUT CARD PHOTOS */
+.ac-photo{width:100%;height:160px;border-radius:var(--r-md);overflow:hidden;margin-bottom:18px;position:relative;}
+.ac-photo-1{
+  background:linear-gradient(135deg,#D4C4B0 0%,#C8B49A 40%,#B8A488 100%);
+}
+.ac-photo-1::before{
+  content:'🔬';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:3.5rem;opacity:0.35;filter:sepia(0.5);
+}
+.ac-photo-1::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 60% 40%,rgba(255,240,220,0.4) 0%,transparent 60%);
+}
+.ac-photo-2{
+  background:linear-gradient(135deg,#C8D4D0 0%,#B8C8C4 40%,#A8B8B4 100%);
+}
+.ac-photo-2::before{
+  content:'📖';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:3.5rem;opacity:0.35;filter:sepia(0.3);
+}
+.ac-photo-3{
+  background:linear-gradient(135deg,#C4D0B8 0%,#B4C0A8 40%,#A4B098 100%);
+}
+.ac-photo-3::before{
+  content:'🌿';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:3.5rem;opacity:0.4;filter:sepia(0.2);
+}
+
+/* BOOK COVER PHOTO SECTION — CSS art by category */
+.bcard-cover-photo{position:absolute;top:0;left:0;right:0;height:58%;overflow:hidden;}
+.bcard-cover-photo::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:50%;
+  background:linear-gradient(to bottom,transparent,var(--cover-bg,#D4C4B0));
+}
+
+/* Category-specific cover photo art */
+.cover-art{width:100%;height:100%;position:relative;display:flex;align-items:center;justify-content:center;}
+.cover-art-mind{background:linear-gradient(150deg,#C4B8D0 0%,#B8A8C8 50%,#A898B8 100%);}
+.cover-art-mind::before{content:'🧘';font-size:3.5rem;opacity:0.5;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.15));}
+.cover-art-nutrition{background:linear-gradient(150deg,#C8D0A8 0%,#B8C098 50%,#A8B088 100%);}
+.cover-art-nutrition::before{content:'🌿';font-size:3.5rem;opacity:0.5;}
+.cover-art-body{background:linear-gradient(150deg,#C0C8D0 0%,#B0B8C0 50%,#A0A8B0 100%);}
+.cover-art-body::before{content:'🌸';font-size:3.5rem;opacity:0.5;}
+.cover-art-lifestyle{background:linear-gradient(150deg,#D0C8B8 0%,#C0B8A8 50%,#B0A898 100%);}
+.cover-art-lifestyle::before{content:'☀️';font-size:3.5rem;opacity:0.5;}
+.cover-art-hormones{background:linear-gradient(150deg,#D0B8C0 0%,#C0A8B0 50%,#B098A0 100%);}
+.cover-art-hormones::before{content:'💐';font-size:3.5rem;opacity:0.5;}
+
+/* owned state */
+.bcard-owned-bar{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(135deg,rgba(140,100,70,0.88),rgba(180,140,100,0.88));backdrop-filter:blur(4px);display:flex;align-items:center;gap:7px;padding:8px 14px;font-size:0.64rem;font-weight:700;color:white;letter-spacing:0.06em;font-family:'Poppins',sans-serif;}
+.bcard-owned-tick{width:18px;height:18px;background:rgba(255,255,255,0.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.6rem;}
+/* meta below cover */
+
+/* ─── COVER ART BASE (top section of book) ─── */
+.bcard-cover{aspect-ratio:2/3;border-radius:4px 12px 12px 4px;overflow:hidden;position:relative;
+  box-shadow:-4px 0 0 #C8B8A0,-6px 2px 8px rgba(0,0,0,0.2),0 12px 40px rgba(0,0,0,0.12);
+  transition:box-shadow 0.4s ease;}
+.bcard-cover::before{content:'';position:absolute;top:0;left:0;width:18px;height:100%;
+  background:linear-gradient(to right,rgba(0,0,0,0.18),rgba(0,0,0,0.04) 60%,transparent);z-index:10;pointer-events:none;}
+.bcard-cover::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.12) 0%,transparent 50%,rgba(0,0,0,0.06) 100%);
+  z-index:9;pointer-events:none;border-radius:inherit;}
+.bcard-cover-inner{width:100%;height:100%;display:flex;flex-direction:column;transition:transform 0.4s ease;}
+.bcard-cover-art{width:100%;height:55%;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.bcard-cover-art-fade{position:absolute;bottom:0;left:0;right:0;height:50%;z-index:2;pointer-events:none;}
+.bcard-cover-art-icon{position:relative;z-index:3;font-size:2.6rem;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.2));}
+.bcard-cover-art-deco{position:absolute;z-index:1;}
+.bcard-cover-text{flex:1;display:flex;flex-direction:column;padding:11px 13px 12px;position:relative;min-height:0;}
+.bcard-cover-rule{width:22px;height:1.5px;margin-bottom:6px;flex-shrink:0;}
+.bcard-cover-cat{font-family:'Cinzel',serif;font-size:0.37rem;letter-spacing:0.26em;text-transform:uppercase;margin-bottom:4px;font-weight:400;opacity:0.55;}
+.bcard-cover-title{font-family:'Cormorant Garamond',serif;font-size:0.88rem;font-weight:600;line-height:1.2;margin-bottom:3px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
+.bcard-cover-tagline{font-family:'Cormorant Garamond',serif;font-size:0.62rem;font-weight:300;font-style:italic;line-height:1.35;opacity:0.65;flex:1;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
+.bcard-cover-foot{display:flex;align-items:center;justify-content:space-between;margin-top:7px;padding-top:6px;flex-shrink:0;}
+.bcard-cover-brand{font-family:'Cinzel',serif;font-size:0.33rem;letter-spacing:0.22em;text-transform:uppercase;opacity:0.38;}
+.bcard-cover-price{font-family:'Cinzel',serif;font-size:0.56rem;font-weight:600;letter-spacing:0.04em;}
+.bcard-meta{padding:12px 4px 0;}
+.bcard-title{font-family:'Cormorant Garamond',serif;font-size:0.95rem;font-weight:600;color:var(--ink);line-height:1.3;}
+
+/* category themes — background only, icons injected via JS */
+.bcat-mind    .bcard-cover-art{background:linear-gradient(160deg,#2C3240,#3D4558,#2A3048);}
+.bcat-mind    .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#1E2535);}
+.bcat-mind    .bcard-cover-text{background:#1E2535;color:#E8DFD0;}
+.bcat-mind    .bcard-cover-rule{background:#C4A86A;}
+.bcat-mind    .bcard-cover-foot{border-top:1px solid rgba(196,168,106,0.2);}
+
+.bcat-nutrition .bcard-cover-art{background:linear-gradient(155deg,#E8EDE0,#D4DECA,#C8D4B8);}
+.bcat-nutrition .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#F5F2EC);}
+.bcat-nutrition .bcard-cover-text{background:#F5F2EC;color:#2C3020;}
+.bcat-nutrition .bcard-cover-rule{background:#5C7A3A;}
+.bcat-nutrition .bcard-cover-foot{border-top:1px solid rgba(92,122,58,0.15);}
+
+.bcat-body .bcard-cover-art{background:linear-gradient(150deg,#E8D5C8,#D8C0B0,#C8A898);}
+.bcat-body .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#F0E8E2);}
+.bcat-body .bcard-cover-text{background:#F0E8E2;color:#2A1E1A;}
+.bcat-body .bcard-cover-rule{background:#A85A3A;}
+.bcat-body .bcard-cover-foot{border-top:1px solid rgba(168,90,58,0.15);}
+
+.bcat-hormones .bcard-cover-art{background:linear-gradient(155deg,#2E1E28,#3D2535,#2A1820);}
+.bcat-hormones .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#1E1018);}
+.bcat-hormones .bcard-cover-text{background:#1E1018;color:#ECD8D0;}
+.bcat-hormones .bcard-cover-rule{background:#C47090;}
+.bcat-hormones .bcard-cover-foot{border-top:1px solid rgba(196,112,144,0.2);}
+
+.bcat-lifestyle .bcard-cover-art{background:linear-gradient(150deg,#E8DDD0,#D8CEC0,#C8BEB0);}
+.bcat-lifestyle .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#F2EDE8);}
+.bcat-lifestyle .bcard-cover-text{background:#F2EDE8;color:#28201C;}
+.bcat-lifestyle .bcard-cover-rule{background:#B86840;}
+.bcat-lifestyle .bcard-cover-foot{border-top:1px solid rgba(184,104,64,0.15);}
+.bcard-meta{padding:14px 4px 0;}
+.bcard-title{font-family:'Poppins',sans-serif;font-size:0.86rem;font-weight:700;color:var(--ink);line-height:1.3;}
+
+
+/* ─── DETAIL MODAL — Gumroad style ─── */
+.modal-overlay{position:fixed;inset:0;z-index:800;background:rgba(0,0,0,0.55);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.detail-box{background:#fff;border-radius:20px;width:100%;max-width:520px;max-height:92vh;overflow-y:auto;position:relative;box-shadow:0 32px 80px rgba(0,0,0,0.2);}
+.det-close{position:absolute;top:14px;right:14px;width:32px;height:32px;background:#F5F0E8;border:none;border-radius:50%;font-size:1rem;color:#6B5E50;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;transition:all 0.2s;}
+.det-close:hover{background:#2A1E14;color:#fff;}
+/* Book cover banner at top */
+.det-cover-banner{width:100%;height:200px;border-radius:20px 20px 0 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;position:relative;overflow:hidden;flex-shrink:0;}
+.det-cover-banner::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.08) 0%,transparent 60%,rgba(0,0,0,0.1) 100%);}
+.det-banner-icon{font-size:4rem;filter:drop-shadow(0 4px 14px rgba(0,0,0,0.25));position:relative;z-index:2;}
+.det-banner-title{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:rgba(255,255,255,0.95);text-align:center;padding:0 32px;position:relative;z-index:2;line-height:1.3;}
+/* Body */
+.det-body{padding:24px 26px 28px;}
+.det-cat{font-size:0.65rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--green);margin-bottom:6px;font-family:'Poppins',sans-serif;}
+.det-title{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:700;color:#1A1A1A;line-height:1.2;margin-bottom:6px;letter-spacing:-0.01em;}
+.det-author{font-size:0.8rem;color:#888;margin-bottom:14px;font-family:'Poppins',sans-serif;}
+.det-price-row{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.det-price-big{font-family:'Poppins',sans-serif;font-size:1.8rem;font-weight:700;color:#1A1A1A;}
+.det-price-note{font-size:0.76rem;color:#999;font-family:'Poppins',sans-serif;line-height:1.4;}
+.det-desc{font-size:0.88rem;color:#555;line-height:1.8;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #F0EBE0;}
+/* What's inside — simple pills */
+.det-includes-label{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#AAA;margin-bottom:12px;font-family:'Poppins',sans-serif;}
+.det-includes{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;}
+.det-include-pill{background:#F7F3EC;border-radius:20px;padding:5px 14px;font-size:0.76rem;color:#5A4A38;font-family:'Poppins',sans-serif;display:flex;align-items:center;gap:5px;}
+/* Buy button — big like Gumroad */
+.det-buy-btn{width:100%;padding:16px;background:#1A1A1A;color:#fff;border:none;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Poppins',sans-serif;letter-spacing:0.02em;transition:all 0.25s;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:10px;}
+.det-buy-btn:hover{background:#000;transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,0,0,0.2);}
+.det-buy-btn.owned{background:var(--green);}
+.det-preview-btn{width:100%;padding:12px;background:#fff;color:#1A1A1A;border:1.5px solid #E0D8CC;border-radius:12px;font-size:0.84rem;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif;transition:all 0.2s;}
+.det-preview-btn:hover{border-color:#B8924A;color:#B8924A;}
+.det-guarantee{text-align:center;margin-top:14px;font-size:0.72rem;color:#AAA;font-family:'Poppins',sans-serif;}
+.det-guarantee span{color:#888;}
+
+/* ─── READER ─── */
+.modal-overlay{position:fixed;inset:0;z-index:800;background:rgba(26,26,46,0.5);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.detail-box{background:white;border-radius:var(--r-xl);width:100%;max-width:860px;max-height:90vh;overflow-y:auto;display:grid;grid-template-columns:280px 1fr;box-shadow:0 40px 100px rgba(0,0,0,0.18);}
+
+
+
+@media(max-width:660px){.detail-box{grid-template-columns:1fr;}.det-left{min-height:200px;border-radius:var(--r-xl) var(--r-xl) 0 0;}.det-right{padding:22px 20px;}}
+
+/* ─── READER ─── */
+.reader-ov{position:fixed;inset:0;z-index:1000;background:#2A2018;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+.reader-ov.open{opacity:1;pointer-events:all;}
+/* TOP BAR */
+.reader-topbar{display:flex;align-items:center;gap:12px;padding:0 16px;height:52px;background:rgba(20,14,8,0.95);border-bottom:1px solid rgba(184,146,74,0.15);flex-shrink:0;}
+.reader-back{width:34px;height:34px;background:rgba(184,146,74,0.12);border:1px solid rgba(184,146,74,0.25);border-radius:50%;color:rgba(212,176,106,0.8);font-size:0.95rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0;}
+.reader-back:hover{background:rgba(184,146,74,0.22);color:#D4B06A;}
+.reader-book-name{font-family:'Cormorant Garamond',serif;font-size:0.9rem;color:rgba(240,228,200,0.75);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-style:italic;}
+.reader-ch-info{font-size:0.6rem;color:rgba(184,146,74,0.6);font-family:'Cinzel',serif;letter-spacing:0.1em;flex-shrink:0;}
+/* BODY */
+.reader-body{display:flex;flex-direction:column;flex:1;align-items:center;justify-content:center;padding:16px 12px;overflow:hidden;gap:16px;}
+/* BOOK — phone-sized, centered */
+.reader-book-wrap{width:100%;max-width:380px;perspective:1200px;flex-shrink:0;}
+.reader-book-stage{position:relative;width:100%;aspect-ratio:3/4;transform-style:preserve-3d;}
+/* PAGE — both front and back */
+.reader-page-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:3px 10px 10px 3px;overflow:hidden;background:#F7F2EA;box-shadow:-3px 0 0 #C8B8A0,-5px 2px 8px rgba(0,0,0,0.25),4px 4px 20px rgba(0,0,0,0.15);}
+.reader-page-face::before{content:'';position:absolute;top:0;left:0;width:14px;height:100%;background:linear-gradient(to right,rgba(0,0,0,0.15),transparent);z-index:10;pointer-events:none;}
+.reader-page-face::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.08) 0%,transparent 60%);pointer-events:none;}
+.reader-page-back{transform:rotateY(180deg);border-radius:10px 3px 3px 10px;box-shadow:3px 0 0 #C8B8A0,5px 2px 8px rgba(0,0,0,0.25),-4px 4px 20px rgba(0,0,0,0.15);}
+/* FLIP ANIMATION */
+.reader-book-stage.flip-fwd{animation:flipFwd 0.6s cubic-bezier(0.645,0.045,0.355,1) forwards;}
+.reader-book-stage.flip-bck{animation:flipBck 0.6s cubic-bezier(0.645,0.045,0.355,1) forwards;}
+@keyframes flipFwd{0%{transform:rotateY(0);}50%{transform:rotateY(-90deg);}100%{transform:rotateY(-180deg);}}
+@keyframes flipBck{0%{transform:rotateY(-180deg);}50%{transform:rotateY(-90deg);}100%{transform:rotateY(0);}}
+/* PAGE CONTENT scroll inside page */
+.reader-page-content{position:absolute;inset:0;overflow-y:auto;padding:28px 22px 36px;-webkit-overflow-scrolling:touch;}
+.reader-page-content::-webkit-scrollbar{width:3px;}
+.reader-page-content::-webkit-scrollbar-thumb{background:rgba(184,146,74,0.3);border-radius:2px;}
+/* PAGE NUMBER */
+.reader-pnum{position:absolute;bottom:10px;font-family:'Cormorant Garamond',serif;font-size:0.6rem;color:#A89E94;font-style:italic;z-index:5;}
+.reader-pnum-l{left:20px;} .reader-pnum-r{right:20px;}
+/* CONTROLS */
+.reader-controls{display:flex;align-items:center;gap:16px;flex-shrink:0;}
+.reader-ctrl{width:44px;height:44px;border-radius:50%;background:rgba(184,146,74,0.1);border:1px solid rgba(184,146,74,0.25);color:rgba(212,176,106,0.8);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+.reader-ctrl:hover:not(:disabled){background:rgba(184,146,74,0.2);border-color:rgba(184,146,74,0.5);}
+.reader-ctrl:disabled{opacity:0.2;cursor:default;}
+.reader-dots{display:flex;gap:6px;align-items:center;}
+.reader-dot{width:5px;height:5px;border-radius:50%;background:rgba(212,176,106,0.2);cursor:pointer;transition:all 0.2s;border:1px solid rgba(212,176,106,0.25);}
+.reader-dot.on{background:#B8924A;width:16px;border-radius:3px;border-color:#B8924A;}
+.reader-pg-count{font-family:'Cormorant Garamond',serif;font-size:0.82rem;font-style:italic;color:rgba(212,176,106,0.5);min-width:44px;text-align:center;}
+/* CONTENT STYLES */
+.rdr-ch-eyebrow{display:block;font-family:'Cinzel',serif;font-size:0.42rem;letter-spacing:0.28em;text-transform:uppercase;color:#B8924A;margin-bottom:14px;}
+.rdr-ch-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:#2A2018;line-height:1.15;margin-bottom:8px;}
+.rdr-ch-sub{font-family:'Cormorant Garamond',serif;font-size:0.82rem;font-style:italic;color:#B8924A;margin-bottom:20px;line-height:1.5;}
+.rdr-rule{display:flex;align-items:center;gap:10px;margin:18px 0;}
+.rdr-rule span{flex:1;height:1px;background:rgba(184,146,74,0.2);}
+.rdr-rule em{font-family:'Cormorant Garamond',serif;font-size:0.8rem;color:#B8924A;font-style:normal;opacity:0.45;}
+.rdr-p{font-family:'Cormorant Garamond',serif;font-size:0.88rem;color:#4A3D34;line-height:1.85;margin-bottom:14px;}
+.rdr-p.drop::first-letter{font-size:2.8rem;font-weight:600;color:#B8924A;float:left;line-height:0.8;margin-right:5px;margin-top:3px;}
+.rdr-h2{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:#2A2018;margin:20px 0 8px;}
+.rdr-h2::before{content:'— ';color:#B8924A;font-weight:300;}
+.rdr-tip{background:#F5EDD8;border-left:2px solid #B8924A;padding:12px 14px;margin:16px 0;border-radius:0 6px 6px 0;}
+.rdr-tip-label{font-family:'Cinzel',serif;font-size:0.38rem;letter-spacing:0.18em;text-transform:uppercase;color:#B8924A;margin-bottom:5px;}
+.rdr-tip p{font-family:'Cormorant Garamond',serif;font-size:0.78rem;font-style:italic;color:#5A4A38;line-height:1.65;margin:0;}
+.rdr-toc-page .rdr-ch-title{font-size:1.5rem;}
+.rdr-toc-row{display:flex;align-items:baseline;padding:7px 0;border-bottom:1px solid rgba(184,146,74,0.08);}
+.rdr-toc-n{font-family:'Cinzel',serif;font-size:0.4rem;color:#B8924A;letter-spacing:0.18em;width:28px;flex-shrink:0;}
+.rdr-toc-t{font-family:'Cormorant Garamond',serif;font-size:0.8rem;font-weight:500;color:#4A3D34;flex:1;line-height:1.3;}
+.rdr-toc-dots{flex:1;border-bottom:1px dotted rgba(184,146,74,0.2);margin:0 6px;position:relative;top:-3px;min-width:10px;}
+.rdr-toc-pg{font-family:'Cormorant Garamond',serif;font-size:0.68rem;color:#C4B8A8;font-style:italic;}
+.rdr-lock{text-align:center;padding:40px 16px;}
+.rdr-lock-icon{width:56px;height:56px;background:#F5EDD8;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin:0 auto 16px;border:1px solid rgba(184,146,74,0.2);}
+.rdr-lock h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:#2A2018;margin-bottom:8px;}
+.rdr-lock p{font-size:0.8rem;color:#7A6E64;line-height:1.75;margin-bottom:20px;font-family:'Cormorant Garamond',serif;font-style:italic;}
+.rdr-lock-btn{background:#2C5F2E;color:#fff;border:none;padding:11px 28px;border-radius:6px;font-size:0.78rem;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif;}
+.rdr-lock-note{font-size:0.68rem;color:#A89E94;margin-top:10px;font-family:'Cormorant Garamond',serif;font-style:italic;}
+/* SIDEBAR — hidden, replaced by dots */
+.reader-sidebar{display:none;}
+
+/* ─── LIBRARY ─── */
+/* ─── LIBRARY ─── */
+/* ─── LIBRARY ─── */
+.lib-ov{position:fixed;inset:0;z-index:800;background:rgba(26,26,46,0.5);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+.lib-ov.open{opacity:1;pointer-events:all;}
+.lib-box{background:white;border-radius:var(--r-xl);width:100%;max-width:880px;max-height:88vh;overflow-y:auto;padding:40px;position:relative;box-shadow:0 40px 100px rgba(0,0,0,0.15);}
+.lib-close{position:absolute;top:20px;right:22px;width:32px;height:32px;background:var(--beige);border:none;border-radius:50%;font-size:1rem;color:var(--ink3);cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.lib-close:hover{background:var(--ink);color:white;}
+.lib-title{font-family:'Poppins',sans-serif;font-size:1.6rem;font-weight:800;color:var(--ink);margin-bottom:4px;}
+.lib-sub{font-size:0.82rem;color:var(--ink3);margin-bottom:28px;}
+.lib-empty{text-align:center;padding:52px 20px;}
+.lib-empty-icon{font-size:3rem;margin-bottom:14px;opacity:0.4;}
+.lib-empty p{font-size:0.88rem;color:var(--ink3);line-height:1.8;}
+.lib-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:18px;}
+.lb{cursor:pointer;}
+.lb-cover{aspect-ratio:3/4;border-radius:var(--r-md);overflow:hidden;position:relative;box-shadow:var(--shadow-md);margin-bottom:10px;transition:transform 0.25s;}
+.lb-cover:hover{transform:translateY(-4px);}
+.lb-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;}
+.lb-icon{font-size:1.8rem;margin-bottom:8px;}
+.lb-name{font-family:'Poppins',sans-serif;font-size:0.72rem;font-weight:700;color:white;text-align:center;line-height:1.3;}
+.lb-btns{display:flex;gap:6px;}
+.lb-btn{flex:1;padding:7px 4px;border-radius:8px;font-size:0.66rem;font-weight:700;cursor:pointer;font-family:'Poppins',sans-serif;border:none;text-align:center;transition:all 0.2s;}
+.lb-read{background:var(--green);color:white;}
+.lb-read:hover{background:var(--ink);}
+.lb-dl{background:var(--beige);color:var(--ink);}
+.lb-dl:hover{background:var(--beige2);}
+
+/* ─── ABOUT ─── */
+.about-section{background:linear-gradient(160deg,var(--mint-pale) 0%,var(--blue-pale) 50%,var(--lav-pale) 100%);}
+.about-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;}
+.ac{background:white;border-radius:var(--r-lg);padding:32px 28px;box-shadow:var(--shadow-md);transition:transform 0.3s;}
+.ac:hover{transform:translateY(-6px);}
+.ac-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:18px;}
+.ac-title{font-family:'Poppins',sans-serif;font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:10px;}
+.ac-text{font-size:0.84rem;color:var(--ink3);line-height:1.8;}
+@media(max-width:768px){.about-cards{grid-template-columns:1fr;}}
+
+
+/* ── ABOUT PHOTOS ── */
+.ac-photo{width:100%;height:160px;border-radius:var(--r-md);overflow:hidden;margin-bottom:18px;}
+.ac-photo img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s;}
+.ac:hover .ac-photo img{transform:scale(1.04);}
+
+/* ─── FAQ ─── */
+.faq-section{background:white;}
+.faq-list{max-width:680px;margin:40px auto 0;}
+.faq-item{border:1.5px solid var(--beige2);border-radius:var(--r-md);margin-bottom:10px;overflow:hidden;transition:border-color 0.2s;}
+.faq-item:hover{border-color:var(--mint);}
+.faq-q{width:100%;background:none;border:none;text-align:left;padding:18px 22px;font-size:0.88rem;font-weight:600;color:var(--ink);cursor:pointer;font-family:'Poppins',sans-serif;display:flex;justify-content:space-between;align-items:center;gap:16px;transition:background 0.15s;}
+.faq-q:hover{background:var(--mint-pale);}
+.faq-arr{width:28px;height:28px;background:var(--beige);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.82rem;color:var(--ink3);transition:all 0.25s;flex-shrink:0;}
+.faq-q.open .faq-arr{background:var(--green);color:white;transform:rotate(180deg);}
+.faq-a{font-size:0.84rem;color:var(--ink3);line-height:1.85;padding:0 22px 18px;display:none;}
+.faq-a.open{display:block;}
+
+/* ─── FOOTER ─── */
+.footer{background:var(--ink);padding:52px 64px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;}
+.foot-logo{display:flex;align-items:center;gap:10px;}
+.foot-pill{width:30px;height:30px;background:linear-gradient(135deg,var(--mint),var(--blue));border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-weight:800;font-size:0.8rem;color:white;}
+.foot-name{font-family:'Poppins',sans-serif;font-weight:700;font-size:0.95rem;color:white;}
+.foot-name span{color:var(--mint);}
+.foot-copy{font-size:0.72rem;color:rgba(255,255,255,0.3);}
+@media(max-width:600px){.footer{flex-direction:column;text-align:center;padding:40px 20px;}}
+
+/* ─── SEARCH ─── */
+.srch-ov{position:fixed;inset:0;z-index:2000;background:rgba(26,26,46,0.65);backdrop-filter:blur(16px);display:flex;align-items:flex-start;justify-content:center;padding-top:100px;opacity:0;pointer-events:none;transition:opacity 0.2s;}
+.srch-ov.open{opacity:1;pointer-events:all;}
+.srch-box{background:white;border-radius:var(--r-xl);width:94%;max-width:560px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.2);}
+.srch-top{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1.5px solid var(--beige2);}
+.srch-icon{color:var(--ink3);font-size:1.1rem;}
+.srch-inp{flex:1;border:none;background:none;font-size:0.92rem;color:var(--ink);font-family:'Poppins',sans-serif;outline:none;}
+.srch-x{width:28px;height:28px;background:var(--beige);border:none;border-radius:50%;font-size:0.85rem;color:var(--ink3);cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.srch-results{max-height:400px;overflow-y:auto;}
+.srch-item{display:flex;align-items:center;gap:14px;padding:12px 20px;cursor:pointer;border-bottom:1px solid var(--beige);transition:background 0.15s;}
+.srch-item:hover{background:var(--mint-pale);}
+.srch-ik{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.srch-name{font-size:0.86rem;font-weight:600;color:var(--ink);font-family:'Poppins',sans-serif;}
+.srch-cat{font-size:0.7rem;color:var(--ink3);text-transform:capitalize;margin-top:1px;}
+.srch-price{font-size:0.8rem;font-weight:700;color:var(--green);font-family:'Poppins',sans-serif;}
+.srch-empty{padding:32px;text-align:center;color:var(--ink3);font-size:0.86rem;}
+
+/* ─── AUTH ─── */
+.auth-ov{position:fixed;inset:0;z-index:3000;background:rgba(26,26,46,0.6);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.25s;}
+.auth-ov.open{opacity:1;pointer-events:all;}
+.auth-box{background:white;border-radius:var(--r-xl);width:94%;max-width:400px;padding:44px 38px;position:relative;box-shadow:0 32px 80px rgba(0,0,0,0.15);}
+.auth-close{position:absolute;top:16px;right:18px;width:30px;height:30px;background:var(--beige);border:none;border-radius:50%;font-size:0.9rem;color:var(--ink3);cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.auth-close:hover{background:var(--ink);color:white;}
+.auth-logo-wrap{text-align:center;margin-bottom:6px;}
+.auth-logo-pill{width:42px;height:42px;background:linear-gradient(135deg,var(--mint),var(--blue));border-radius:12px;display:inline-flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-weight:800;font-size:1.1rem;color:white;margin-bottom:10px;}
+.auth-title{font-family:'Poppins',sans-serif;font-size:1.55rem;font-weight:800;color:var(--ink);text-align:center;margin-bottom:5px;}
+.auth-sub{font-size:0.8rem;color:var(--ink3);text-align:center;margin-bottom:26px;}
+.auth-err{background:#FFF5F5;border:1.5px solid #FECACA;color:#DC2626;padding:10px 14px;border-radius:10px;font-size:0.78rem;margin-bottom:12px;display:none;}
+.auth-ok{background:#F0FDF4;border:1.5px solid #BBF7D0;color:#166534;padding:10px 14px;border-radius:10px;font-size:0.78rem;margin-bottom:12px;display:none;}
+.auth-err.show,.auth-ok.show{display:block;}
+.auth-field{margin-bottom:13px;}
+.auth-field label{display:block;font-size:0.68rem;font-weight:700;color:var(--ink3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:7px;font-family:'Poppins',sans-serif;}
+.auth-field input{width:100%;padding:11px 16px;border:1.5px solid var(--beige2);border-radius:12px;font-size:0.88rem;color:var(--ink);background:var(--beige);font-family:'Lato',sans-serif;outline:none;transition:border-color 0.2s;box-sizing:border-box;}
+.auth-field input:focus{border-color:var(--mint);background:white;}
+.auth-submit{width:100%;padding:13px;border-radius:14px;background:linear-gradient(135deg,var(--green),#4DB87A);color:white;border:none;font-size:0.84rem;font-weight:700;cursor:pointer;font-family:'Poppins',sans-serif;box-shadow:0 6px 20px rgba(46,139,87,0.28);transition:all 0.25s;margin-top:4px;}
+.auth-submit:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(46,139,87,0.38);}
+.auth-switch{text-align:center;margin-top:16px;font-size:0.8rem;color:var(--ink3);}
+.auth-switch a{color:var(--green);font-weight:700;cursor:pointer;}
+
+/* ─── TOAST ─── */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--ink);color:white;padding:11px 24px;border-radius:24px;font-size:0.8rem;font-weight:500;z-index:9999;opacity:0;transition:all 0.3s;white-space:nowrap;max-width:90vw;text-align:center;box-shadow:0 6px 20px rgba(0,0,0,0.2);font-family:'Poppins',sans-serif;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ─── REVEAL ─── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s,transform 0.6s;}
+.reveal.vis{opacity:1;transform:translateY(0);}
+.reveal-delay1{transition-delay:0.1s;}
+.reveal-delay2{transition-delay:0.2s;}
+.reveal-delay3{transition-delay:0.3s;}
+
+/* ── Per-book cover styles ── */
+.book-1 .bcard-cover-art{background:linear-gradient(145deg,#1C2B3A,#2E4560,#1A3048);}
+.book-1 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#0E1C2A);}
+.book-1 .bcard-cover-text{background:#0E1C2A;color:#E8DFD0;}
+.book-1 .bcard-cover-rule{background:#7EB8D4;}
+.book-1 .bcard-cover-foot{border-top:1px solid #7EB8D444;}
+.book-2 .bcard-cover-art{background:linear-gradient(150deg,#1A2E1A,#2D4A2A,#1E3820);}
+.book-2 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#0E1C0E);}
+.book-2 .bcard-cover-text{background:#0E1C0E;color:#E0EDD8;}
+.book-2 .bcard-cover-rule{background:#7EC87E;}
+.book-2 .bcard-cover-foot{border-top:1px solid #7EC87E44;}
+.book-3 .bcard-cover-art{background:linear-gradient(160deg,#3A1A0A,#5C2E14,#3A1E0E);}
+.book-3 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#2A0E04);}
+.book-3 .bcard-cover-text{background:#2A0E04;color:#F0DDD0;}
+.book-3 .bcard-cover-rule{background:#E8946A;}
+.book-3 .bcard-cover-foot{border-top:1px solid #E8946A44;}
+.book-4 .bcard-cover-art{background:linear-gradient(150deg,#0A1428,#142244,#0C1A38);}
+.book-4 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#06101E);}
+.book-4 .bcard-cover-text{background:#06101E;color:#D0DCF0;}
+.book-4 .bcard-cover-rule{background:#7090D4;}
+.book-4 .bcard-cover-foot{border-top:1px solid #7090D444;}
+.book-5 .bcard-cover-art{background:linear-gradient(155deg,#1A2810,#2E4018,#1E3014);}
+.book-5 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#101808);}
+.book-5 .bcard-cover-text{background:#101808;color:#DCE8D0;}
+.book-5 .bcard-cover-rule{background:#8CBE6A;}
+.book-5 .bcard-cover-foot{border-top:1px solid #8CBE6A44;}
+.book-6 .bcard-cover-art{background:linear-gradient(145deg,#2E1A08,#4A2E10,#2E2010);}
+.book-6 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#1E0E04);}
+.book-6 .bcard-cover-text{background:#1E0E04;color:#EED8C0;}
+.book-6 .bcard-cover-rule{background:#D4904A;}
+.book-6 .bcard-cover-foot{border-top:1px solid #D4904A44;}
+.book-7 .bcard-cover-art{background:linear-gradient(150deg,#2E0E1E,#48182E,#340C22);}
+.book-7 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#1E0810);}
+.book-7 .bcard-cover-text{background:#1E0810;color:#F0D0DC;}
+.book-7 .bcard-cover-rule{background:#E0708E;}
+.book-7 .bcard-cover-foot{border-top:1px solid #E0708E44;}
+.book-8 .bcard-cover-art{background:linear-gradient(155deg,#081E2E,#103248,#0A2438);}
+.book-8 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#041018);}
+.book-8 .bcard-cover-text{background:#041018;color:#C8DDE8;}
+.book-8 .bcard-cover-rule{background:#5CAAC8;}
+.book-8 .bcard-cover-foot{border-top:1px solid #5CAAC844;}
+.book-9 .bcard-cover-art{background:linear-gradient(145deg,#102010,#1C341C,#142818);}
+.book-9 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#081208);}
+.book-9 .bcard-cover-text{background:#081208;color:#D4E8D0;}
+.book-9 .bcard-cover-rule{background:#78BC78;}
+.book-9 .bcard-cover-foot{border-top:1px solid #78BC7844;}
+.book-10 .bcard-cover-art{background:linear-gradient(160deg,#2A2010,#44341A,#2E2814);}
+.book-10 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#1A1408);}
+.book-10 .bcard-cover-text{background:#1A1408;color:#EEE0C8;}
+.book-10 .bcard-cover-rule{background:#C8A85A;}
+.book-10 .bcard-cover-foot{border-top:1px solid #C8A85A44;}
+.book-11 .bcard-cover-art{background:linear-gradient(145deg,#2E0808,#480E0E,#340A0A);}
+.book-11 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#1E0404);}
+.book-11 .bcard-cover-text{background:#1E0404;color:#F0D0D0;}
+.book-11 .bcard-cover-rule{background:#E06060;}
+.book-11 .bcard-cover-foot{border-top:1px solid #E0606044;}
+.book-12 .bcard-cover-art{background:linear-gradient(150deg,#081E2A,#103248,#0C2438);}
+.book-12 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#041018);}
+.book-12 .bcard-cover-text{background:#041018;color:#C8E0E8;}
+.book-12 .bcard-cover-rule{background:#50A8C0;}
+.book-12 .bcard-cover-foot{border-top:1px solid #50A8C044;}
+.book-13 .bcard-cover-art{background:linear-gradient(155deg,#180A28,#281440,#1C0C32);}
+.book-13 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#0E0418);}
+.book-13 .bcard-cover-text{background:#0E0418;color:#DCCCE8;}
+.book-13 .bcard-cover-rule{background:#9870C0;}
+.book-13 .bcard-cover-foot{border-top:1px solid #9870C044;}
+.book-14 .bcard-cover-art{background:linear-gradient(145deg,#0C2210,#163818,#101C10);}
+.book-14 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#061208);}
+.book-14 .bcard-cover-text{background:#061208;color:#CCE0CC;}
+.book-14 .bcard-cover-rule{background:#60A860;}
+.book-14 .bcard-cover-foot{border-top:1px solid #60A86044;}
+.book-15 .bcard-cover-art{background:linear-gradient(150deg,#101820,#1C2A34,#141E28);}
+.book-15 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#080E14);}
+.book-15 .bcard-cover-text{background:#080E14;color:#C8D4DC;}
+.book-15 .bcard-cover-rule{background:#7090A0;}
+.book-15 .bcard-cover-foot{border-top:1px solid #7090A044;}
+.book-16 .bcard-cover-art{background:linear-gradient(155deg,#080E28,#101840,#0A1230);}
+.book-16 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#040818);}
+.book-16 .bcard-cover-text{background:#040818;color:#C4CCE8;}
+.book-16 .bcard-cover-rule{background:#6070C0;}
+.book-16 .bcard-cover-foot{border-top:1px solid #6070C044;}
+.book-17 .bcard-cover-art{background:linear-gradient(145deg,#082018,#103428,#0C2820);}
+.book-17 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#041008);}
+.book-17 .bcard-cover-text{background:#041008;color:#C4DCD8;}
+.book-17 .bcard-cover-rule{background:#50A090;}
+.book-17 .bcard-cover-foot{border-top:1px solid #50A09044;}
+.book-18 .bcard-cover-art{background:linear-gradient(150deg,#2E0818,#481028,#341020);}
+.book-18 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#1E0410);}
+.book-18 .bcard-cover-text{background:#1E0410;color:#ECC8D4;}
+.book-18 .bcard-cover-rule{background:#D46080;}
+.book-18 .bcard-cover-foot{border-top:1px solid #D4608044;}
+.book-19 .bcard-cover-art{background:linear-gradient(155deg,#081428,#102040,#0C1830);}
+.book-19 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#040A18);}
+.book-19 .bcard-cover-text{background:#040A18;color:#C4D0E8;}
+.book-19 .bcard-cover-rule{background:#5878C0;}
+.book-19 .bcard-cover-foot{border-top:1px solid #5878C044;}
+.book-20 .bcard-cover-art{background:linear-gradient(145deg,#0A1E20,#143034,#0E2428);}
+.book-20 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#061014);}
+.book-20 .bcard-cover-text{background:#061014;color:#C4D8DC;}
+.book-20 .bcard-cover-rule{background:#50A4AC;}
+.book-20 .bcard-cover-foot{border-top:1px solid #50A4AC44;}
+.book-21 .bcard-cover-art{background:linear-gradient(150deg,#2A1008,#441A10,#2E1410);}
+.book-21 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#180804);}
+.book-21 .bcard-cover-text{background:#180804;color:#ECD4C4;}
+.book-21 .bcard-cover-rule{background:#D07050;}
+.book-21 .bcard-cover-foot{border-top:1px solid #D0705044;}
+.book-22 .bcard-cover-art{background:linear-gradient(155deg,#0E0C28,#181440,#100E30);}
+.book-22 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#080618);}
+.book-22 .bcard-cover-text{background:#080618;color:#CCC8E8;}
+.book-22 .bcard-cover-rule{background:#8880C0;}
+.book-22 .bcard-cover-foot{border-top:1px solid #8880C044;}
+.book-23 .bcard-cover-art{background:linear-gradient(145deg,#08101E,#101C34,#0C1428);}
+.book-23 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#040810);}
+.book-23 .bcard-cover-text{background:#040810;color:#C4CCDC;}
+.book-23 .bcard-cover-rule{background:#5870A8;}
+.book-23 .bcard-cover-foot{border-top:1px solid #5870A844;}
+.book-24 .bcard-cover-art{background:linear-gradient(150deg,#28200A,#403410,#2C2810);}
+.book-24 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#181404);}
+.book-24 .bcard-cover-text{background:#181404;color:#EADCBC;}
+.book-24 .bcard-cover-rule{background:#C0A040;}
+.book-24 .bcard-cover-foot{border-top:1px solid #C0A04044;}
+.book-25 .bcard-cover-art{background:linear-gradient(155deg,#280A18,#401028,#2C0C1E);}
+.book-25 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#180408);}
+.book-25 .bcard-cover-text{background:#180408;color:#E8C8D4;}
+.book-25 .bcard-cover-rule{background:#C06080;}
+.book-25 .bcard-cover-foot{border-top:1px solid #C0608044;}
+.book-26 .bcard-cover-art{background:linear-gradient(145deg,#081C14,#102E20,#0C2018);}
+.book-26 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#040E08);}
+.book-26 .bcard-cover-text{background:#040E08;color:#C4D8CC;}
+.book-26 .bcard-cover-rule{background:#509870;}
+.book-26 .bcard-cover-foot{border-top:1px solid #50987044;}
+.book-27 .bcard-cover-art{background:linear-gradient(150deg,#281408,#401E08,#2C1A0C);}
+.book-27 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#180C04);}
+.book-27 .bcard-cover-text{background:#180C04;color:#ECD8BC;}
+.book-27 .bcard-cover-rule{background:#C08830;}
+.book-27 .bcard-cover-foot{border-top:1px solid #C0883044;}
+.book-28 .bcard-cover-art{background:linear-gradient(155deg,#1C1008,#2E1C10,#201410);}
+.book-28 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#100804);}
+.book-28 .bcard-cover-text{background:#100804;color:#E0CCBC;}
+.book-28 .bcard-cover-rule{background:#A07860;}
+.book-28 .bcard-cover-foot{border-top:1px solid #A0786044;}
+.book-29 .bcard-cover-art{background:linear-gradient(145deg,#100C28,#1C1440,#140E30);}
+.book-29 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#080618);}
+.book-29 .bcard-cover-text{background:#080618;color:#D0CCE8;}
+.book-29 .bcard-cover-rule{background:#9088C0;}
+.book-29 .bcard-cover-foot{border-top:1px solid #9088C044;}
+.book-30 .bcard-cover-art{background:linear-gradient(150deg,#281408,#40200C,#2E1A0C);}
+.book-30 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#180C04);}
+.book-30 .bcard-cover-text{background:#180C04;color:#ECD8BC;}
+.book-30 .bcard-cover-rule{background:#C88840;}
+.book-30 .bcard-cover-foot{border-top:1px solid #C8884044;}
+.book-31 .bcard-cover-art{background:linear-gradient(155deg,#0E1C08,#182E10,#101E0C);}
+.book-31 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#081004);}
+.book-31 .bcard-cover-text{background:#081004;color:#CCE0BC;}
+.book-31 .bcard-cover-rule{background:#70A050;}
+.book-31 .bcard-cover-foot{border-top:1px solid #70A05044;}
+.book-32 .bcard-cover-art{background:linear-gradient(145deg,#081C1E,#102E32,#0C2028);}
+.book-32 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#040E10);}
+.book-32 .bcard-cover-text{background:#040E10;color:#C4D8DC;}
+.book-32 .bcard-cover-rule{background:#50A0A8;}
+.book-32 .bcard-cover-foot{border-top:1px solid #50A0A844;}
+.book-33 .bcard-cover-art{background:linear-gradient(150deg,#081C18,#102E28,#0C2020);}
+.book-33 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#040E0C);}
+.book-33 .bcard-cover-text{background:#040E0C;color:#C4D8D4;}
+.book-33 .bcard-cover-rule{background:#50988C;}
+.book-33 .bcard-cover-foot{border-top:1px solid #50988C44;}
+.book-34 .bcard-cover-art{background:linear-gradient(155deg,#101418,#1C2028,#141820);}
+.book-34 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#080C10);}
+.book-34 .bcard-cover-text{background:#080C10;color:#C8CCD4;}
+.book-34 .bcard-cover-rule{background:#707890;}
+.book-34 .bcard-cover-foot{border-top:1px solid #70789044;}
+.book-35 .bcard-cover-art{background:linear-gradient(145deg,#281E08,#40300C,#2C2810);}
+.book-35 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#181204);}
+.book-35 .bcard-cover-text{background:#181204;color:#E8D8B4;}
+.book-35 .bcard-cover-rule{background:#C0A030;}
+.book-35 .bcard-cover-foot{border-top:1px solid #C0A03044;}
+.book-36 .bcard-cover-art{background:linear-gradient(150deg,#081C18,#102E28,#0A2420);}
+.book-36 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#041008);}
+.book-36 .bcard-cover-text{background:#041008;color:#C4D8D4;}
+.book-36 .bcard-cover-rule{background:#70C4B8;}
+.book-36 .bcard-cover-foot{border-top:1px solid #70C4B844;}
+.book-37 .bcard-cover-art{background:linear-gradient(155deg,#2E0E08,#481610,#34100C);}
+.book-37 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#1E0804);}
+.book-37 .bcard-cover-text{background:#1E0804;color:#EDD0C4;}
+.book-37 .bcard-cover-rule{background:#D06048;}
+.book-37 .bcard-cover-foot{border-top:1px solid #D0604844;}
+.book-38 .bcard-cover-art{background:linear-gradient(145deg,#160C28,#221440,#180E30);}
+.book-38 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#0C0618);}
+.book-38 .bcard-cover-text{background:#0C0618;color:#D8CCE8;}
+.book-38 .bcard-cover-rule{background:#A888C8;}
+.book-38 .bcard-cover-foot{border-top:1px solid #A888C844;}
+.book-39 .bcard-cover-art{background:linear-gradient(150deg,#0A1808,#141E0E,#0E1E0C);}
+.book-39 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#060C04);}
+.book-39 .bcard-cover-text{background:#060C04;color:#C8D4C0;}
+.book-39 .bcard-cover-rule{background:#608050;}
+.book-39 .bcard-cover-foot{border-top:1px solid #60805044;}
+.book-40 .bcard-cover-art{background:linear-gradient(155deg,#1E1C08,#302C0C,#242010);}
+.book-40 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#10100C);}
+.book-40 .bcard-cover-text{background:#10100C;color:#E0DCA8;}
+.book-40 .bcard-cover-rule{background:#B0A030;}
+.book-40 .bcard-cover-foot{border-top:1px solid #B0A03044;}
+.book-41 .bcard-cover-art{background:linear-gradient(145deg,#200A1A,#34102A,#280C20);}
+.book-41 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#120408);}
+.book-41 .bcard-cover-text{background:#120408;color:#E8C8D8;}
+.book-41 .bcard-cover-rule{background:#C06090;}
+.book-41 .bcard-cover-foot{border-top:1px solid #C0609044;}
+.book-42 .bcard-cover-art{background:linear-gradient(150deg,#080C28,#101440,#0C1030);}
+.book-42 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#040618);}
+.book-42 .bcard-cover-text{background:#040618;color:#C4C8E8;}
+.book-42 .bcard-cover-rule{background:#6068C0;}
+.book-42 .bcard-cover-foot{border-top:1px solid #6068C044;}
+.book-43 .bcard-cover-art{background:linear-gradient(155deg,#180E08,#28180E,#1C1210);}
+.book-43 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#0E0804);}
+.book-43 .bcard-cover-text{background:#0E0804;color:#E0CEC0;}
+.book-43 .bcard-cover-rule{background:#A07C60;}
+.book-43 .bcard-cover-foot{border-top:1px solid #A07C6044;}
+.book-44 .bcard-cover-art{background:linear-gradient(145deg,#081A18,#0E2C28,#0A2020);}
+.book-44 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#040E0C);}
+.book-44 .bcard-cover-text{background:#040E0C;color:#C4D8D4;}
+.book-44 .bcard-cover-rule{background:#48A090;}
+.book-44 .bcard-cover-foot{border-top:1px solid #48A09044;}
+.book-45 .bcard-cover-art{background:linear-gradient(150deg,#160A28,#221040,#1A0C30);}
+.book-45 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#0C0418);}
+.book-45 .bcard-cover-text{background:#0C0418;color:#D4C8E8;}
+.book-45 .bcard-cover-rule{background:#9870B8;}
+.book-45 .bcard-cover-foot{border-top:1px solid #9870B844;}
+.book-46 .bcard-cover-art{background:linear-gradient(155deg,#280A04,#40100A,#300C08);}
+.book-46 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#180604);}
+.book-46 .bcard-cover-text{background:#180604;color:#ECC8C0;}
+.book-46 .bcard-cover-rule{background:#D06050;}
+.book-46 .bcard-cover-foot{border-top:1px solid #D0605044;}
+.book-47 .bcard-cover-art{background:linear-gradient(145deg,#24081A,#38102A,#2C0C20);}
+.book-47 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#140408);}
+.book-47 .bcard-cover-text{background:#140408;color:#E8C4D4;}
+.book-47 .bcard-cover-rule{background:#C05888;}
+.book-47 .bcard-cover-foot{border-top:1px solid #C0588844;}
+.book-48 .bcard-cover-art{background:linear-gradient(150deg,#281408,#401E0A,#2E180C);}
+.book-48 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#180C04);}
+.book-48 .bcard-cover-text{background:#180C04;color:#ECDABC;}
+.book-48 .bcard-cover-rule{background:#C89040;}
+.book-48 .bcard-cover-foot{border-top:1px solid #C8904044;}
+.book-49 .bcard-cover-art{background:linear-gradient(155deg,#081C18,#102E28,#0C2420);}
+.book-49 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#040E0C);}
+.book-49 .bcard-cover-text{background:#040E0C;color:#C4D8D4;}
+.book-49 .bcard-cover-rule{background:#50988A;}
+.book-49 .bcard-cover-foot{border-top:1px solid #50988A44;}
+.book-50 .bcard-cover-art{background:linear-gradient(145deg,#201808,#34280C,#281E0C);}
+.book-50 .bcard-cover-art-fade{background:linear-gradient(to bottom,transparent,#140C04);}
+.book-50 .bcard-cover-text{background:#140C04;color:#E8D8B8;}
+.book-50 .bcard-cover-rule{background:#C0A840;}
+.book-50 .bcard-cover-foot{border-top:1px solid #C0A84044;}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-pill">L</div>
+    <span class="nav-logo-text">Luminae <span>Wellness</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="#library" class="nav-link">Library</a>
+    <a href="#about" class="nav-link">About</a>
+    <a href="#faq" class="nav-link">FAQ</a>
+  </div>
+  <div class="nav-right">
+    <button class="nav-search" onclick="openSearch()" title="Search">⌕</button>
+    <div id="navAuth"><div style="background:#B8924A;color:white;padding:6px 16px;border-radius:20px;font-size:0.75rem;font-weight:700;font-family:Poppins,sans-serif;letter-spacing:0.06em;">✦ DEMO — All Books Unlocked</div></div>
+  </div>
+  <button class="ham" onclick="toggleMob()">☰</button>
+</nav>
+<div style="background:linear-gradient(135deg,#B8924A,#D4B06A);color:white;text-align:center;padding:8px 20px;font-size:0.76rem;font-weight:600;font-family:Poppins,sans-serif;letter-spacing:0.06em;position:fixed;top:52px;left:0;right:0;z-index:99;">✦ DEMO VERSION — All 50 books are unlocked for testing ✦</div>
+<div class="mob-nav" id="mobNav">
+  <a href="#library" class="mob-lnk" onclick="toggleMob()">Library</a>
+  <a href="#about" class="mob-lnk" onclick="toggleMob()">About</a>
+  <a href="#faq" class="mob-lnk" onclick="toggleMob()">FAQ</a>
+  <button class="mob-lnk" id="mobAuthBtn" onclick="openAuth('signup');toggleMob()" style="background:none;border:none;text-align:left;cursor:pointer;font-size:.9rem;font-weight:500;color:var(--ink);font-family:'Poppins',sans-serif">Sign In</button>
+  <button class="mob-lnk" id="mobLibBtn" onclick="openLibrary();toggleMob()" style="background:none;border:none;text-align:left;cursor:pointer;font-size:.9rem;font-weight:600;color:var(--green);display:none;font-family:'Poppins',sans-serif">My Library</button>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-blob1"></div>
+  <div class="hero-blob2"></div>
+  <div class="hero-blob3"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag"><span class="hero-tag-dot"></span>Premium Wellness Library</div>
+      <h1 class="hero-h1">Your health journey<br>starts with <em>knowledge.</em></h1>
+      <p class="hero-sub">Expert wellness ebooks crafted with evidence-based research. From mental clarity to hormonal health — discover the books your body has been waiting for.</p>
+      <div class="hero-btns">
+        <button class="btn-hero" onclick="document.getElementById('library').scrollIntoView({behavior:'smooth'})">Explore the Library</button>
+        
+      </div>
+      <div class="hero-trust">
+        <div class="hero-trust-item"><div class="hero-trust-icon">🔒</div>Secure checkout</div>
+        <div class="hero-trust-item"><div class="hero-trust-icon">📱</div>Read anywhere</div>
+        <div class="hero-trust-item"><div class="hero-trust-icon">♾️</div>Own forever</div>
+      </div>
+      <div class="hero-review-card">
+        <div class="hero-review-stars">★★★★★</div>
+        <div class="hero-review-text">"Transformed my approach to wellness completely."</div>
+        <div class="hero-review-author">— Luminae Reader</div>
+      </div>
+    </div>
+    <div class="hero-book-showcase" id="heroShowcase"></div>
+  </div>
+</section>
+
+<!-- LIBRARY -->
+<section class="section" id="library" style="background:var(--beige);">
+  <div class="sec-center reveal">
+    <div class="sec-pill">✦ The Collection</div>
+    <h2 class="sec-h2">Curated ebooks for every<br><em>dimension of wellness</em></h2>
+    <p class="sec-sub">Each book is a complete evidence-based guide. Purchase any title for instant lifetime access.</p>
+  </div>
+  <div class="filter-row reveal">
+    <div class="filter-group">
+      <button class="f-btn on" onclick="filterBks('all',this)">All</button>
+      <button class="f-btn" onclick="filterBks('mind',this)">Mind</button>
+      <button class="f-btn" onclick="filterBks('body',this)">Body</button>
+      <button class="f-btn" onclick="filterBks('nutrition',this)">Nutrition</button>
+      <button class="f-btn" onclick="filterBks('hormones',this)">Hormones</button>
+      <button class="f-btn" onclick="filterBks('lifestyle',this)">Lifestyle</button>
+    </div>
+    <button class="f-search" onclick="openSearch()">⌕ Search books</button>
+  </div>
+  <div class="books-grid" id="booksGrid"></div>
+</section>
+
+<!-- ABOUT -->
+<section class="section about-section" id="about">
+  <div class="sec-center reveal">
+    <div class="sec-pill">🌿 Why Luminae</div>
+    <h2 class="sec-h2">Built for those who take<br><em>wellness seriously</em></h2>
+    <p class="sec-sub">We make expert health knowledge beautiful, accessible, and actionable.</p>
+  </div>
+  <div class="about-cards reveal">
+    <div class="ac reveal-delay1">
+      
+      <div class="ac-icon" style="background:var(--mint-pale)">🔬</div>
+      <div class="ac-title">Evidence-Based</div>
+      <div class="ac-text">Every book is grounded in peer-reviewed research. No fads, no guesswork — only what the science actually supports.</div>
+    </div>
+    <div class="ac reveal-delay2">
+      
+      <div class="ac-icon" style="background:var(--blue-pale)">📱</div>
+      <div class="ac-title">Read Anywhere</div>
+      <div class="ac-text">Read online in our clean reader or download to keep forever. Your library lives on any device, anytime.</div>
+    </div>
+    <div class="ac reveal-delay3">
+      
+      <div class="ac-icon" style="background:var(--lav-pale)">🔐</div>
+      <div class="ac-title">Own Forever</div>
+      <div class="ac-text">One-time purchase. No subscription, no recurring fees. Every book you buy is yours to keep for life.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq-section" id="faq">
+  <div class="sec-center reveal">
+    <div class="sec-pill">💬 Questions</div>
+    <h2 class="sec-h2">Frequently <em>asked</em></h2>
+  </div>
+  <div class="faq-list reveal">
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How do I access my books after purchase?<span class="faq-arr">›</span></button><div class="faq-a">Sign up for an account, complete your purchase, and the book appears instantly in your library. Access it from any device, anytime.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Do I need to create an account?<span class="faq-arr">›</span></button><div class="faq-a">Yes, a free account is required so your purchases are saved and accessible across all your devices.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can I download the books?<span class="faq-arr">›</span></button><div class="faq-a">Yes. Every book you own can be downloaded as a file to read offline at any time.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is this a subscription?<span class="faq-arr">›</span></button><div class="faq-a">No. Every purchase is a one-time payment. You own the book forever with no recurring charges.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is checkout secure?<span class="faq-arr">›</span></button><div class="faq-a">Yes. All payments are processed securely through Stripe. We never store your card details.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What format are the books in?<span class="faq-arr">›</span></button><div class="faq-a">Books are available to read online in our built-in reader, or download as an HTML file you can open in any browser.</div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="foot-logo"><div class="foot-pill">L</div><span class="foot-name">Luminae <span>Wellness</span></span></div>
+  <div class="foot-copy">© 2025 Luminae. All rights reserved.</div>
+</footer>
+
+<!-- DETAIL MODAL -->
+<div class="modal-overlay" id="detailOv">
+  <div class="detail-box">
+    <button class="det-close" onclick="closeDetail()">✕</button>
+    <div class="det-cover-banner" id="detBanner">
+      <div class="det-banner-icon" id="detIcon"></div>
+      <div class="det-banner-title" id="detBannerTitle"></div>
+    </div>
+    <div class="det-body">
+      <div class="det-cat" id="detCat"></div>
+      <div class="det-title" id="detTitle"></div>
+      <div class="det-author">by Luminae · <span id="detCatSpan"></span></div>
+      <div class="det-price-row">
+        <div class="det-price-big" id="detPrice"></div>
+        <div class="det-price-note">One-time purchase<br>Own forever</div>
+      </div>
+      <div class="det-desc" id="detDesc"></div>
+      <div class="det-includes-label">What's inside</div>
+      <div class="det-includes" id="detIncludes"></div>
+      <button class="det-buy-btn" id="detBuyBtn" onclick="detBuyAction()"></button>
+
+      <div class="det-guarantee">🔒 Secure checkout via Stripe · <span>Instant access after payment</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- READER -->
+<div class="reader-ov" id="readerOv">
+  <div class="reader-topbar">
+    <button class="reader-back" onclick="closeReader()">←</button>
+    <div class="reader-book-name" id="readerTitle"></div>
+    <div class="reader-ch-info" id="readerInfo"></div>
+  </div>
+  <div class="reader-body">
+    <div class="reader-book-wrap">
+      <div class="reader-book-stage" id="readerStage">
+        <div class="reader-page-face" id="readerFront">
+          <div class="reader-page-content" id="readerPage"></div>
+        </div>
+        <div class="reader-page-face reader-page-back" id="readerBack">
+          <div class="reader-page-content" id="readerPageBack"></div>
+        </div>
+      </div>
+    </div>
+    <div class="reader-controls">
+      <button class="reader-ctrl" id="readerPrev" onclick="flipPage(-1)" disabled>←</button>
+      <div class="reader-dots" id="readerDots"></div>
+      <span class="reader-pg-count" id="readerCount"></span>
+      <button class="reader-ctrl" id="readerNext" onclick="flipPage(1)">→</button>
+    </div>
+  </div>
+</div>
+
+<!-- LIBRARY -->
+<div class="lib-ov" id="libOv">
+  <div class="lib-box">
+    <button class="lib-close" onclick="closeLibrary()">✕</button>
+    <div class="lib-title">My Library</div>
+    <div class="lib-sub" id="libSub">Your purchased books</div>
+    <div class="lib-empty" id="libEmpty" style="display:none"><div class="lib-empty-icon">📚</div><p>No books yet. Browse the collection and unlock your first title.</p></div>
+    <div class="lib-grid" id="libGrid"></div>
+  </div>
+</div>
+
+<!-- SEARCH -->
+<div class="srch-ov" id="srchOv">
+  <div class="srch-box">
+    <div class="srch-top">
+      <span class="srch-icon">⌕</span>
+      <input class="srch-inp" id="srchInp" placeholder="Search wellness books…" oninput="runSearch(this.value)">
+      <button class="srch-x" onclick="closeSearch()">✕</button>
+    </div>
+    <div class="srch-results" id="srchResults"></div>
+  </div>
+</div>
+
+<!-- AUTH -->
+<div class="auth-ov" id="authOv">
+  <div class="auth-box">
+    <button class="auth-close" onclick="closeAuth()">✕</button>
+    <div class="auth-logo-wrap"><div class="auth-logo-pill">L</div></div>
+    <div id="authSignup">
+      <div class="auth-title">Create Account</div>
+      <div class="auth-sub">Access your books from any device</div>
+      <div class="auth-err" id="signupErr"></div>
+      <div class="auth-ok" id="signupOk"></div>
+      <div class="auth-field"><label>Name</label><input type="text" id="signupName" placeholder="Your name"></div>
+      <div class="auth-field"><label>Email</label><input type="email" id="signupEmail" placeholder="you@email.com"></div>
+      <div class="auth-field"><label>Password</label><input type="password" id="signupPass" placeholder="Minimum 6 characters"></div>
+      <button class="auth-submit" onclick="doSignup()">Create Account</button>
+      <div class="auth-switch">Already have an account? <a onclick="showLogin()">Sign in</a></div>
+    </div>
+    <div id="authLogin" style="display:none">
+      <div class="auth-title">Welcome back</div>
+      <div class="auth-sub">Sign in to access your library</div>
+      <div class="auth-err" id="loginErr"></div>
+      <div class="auth-field"><label>Email</label><input type="email" id="loginEmail" placeholder="you@email.com"></div>
+      <div class="auth-field"><label>Password</label><input type="password" id="loginPass" placeholder="Your password"></div>
+      <button class="auth-submit" onclick="doLogin()">Sign In</button>
+      <div class="auth-switch">No account? <a onclick="showSignup()">Sign up</a></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const STRIPE={6.99:'https://buy.stripe.com/9B6eV69LIeww8ac6BR8Vi00',7.99:'https://buy.stripe.com/bJeaEQ4ro2NO9eg4tJ8Vi01',8.99:'https://buy.stripe.com/bJeaEQaPMcoocqs3pF8Vi02',9.99:'https://buy.stripe.com/00wfZa5vs6001LO3pF8Vi03'};
+
+// Each book has a pastel gradient palette
+const PALETTES=[
+  ['#C4B5A5','#D4C8BB','#E8DDD4'],// warm taupe
+  ['#B8A898','#CCB8A8','#E0D0C0'],// sand beige
+  ['#A89888','#BCA898','#D0BCB0'],// warm brown-grey
+  ['#C8B8A8','#D8CAB8','#ECE0D0'],// parchment
+  ['#B0A898','#C4B8AC','#D8CCC4'],// greige
+  ['#A8B0A0','#BCCCB0','#D4E0CC'],// sage cream
+  ['#C0A8A0','#D4BCB4','#E8D4CC'],// dusty rose
+  ['#A8B8C0','#BCCCD4','#D0E0E8'],// muted blue-grey
+  ['#B8B0A0','#CCC4B0','#E0D8C8'],// linen
+  ['#C4B0A8','#D8C4BC','#ECD8D0'],// blush
+];
+
+// Photos use CSS art
+
+const BOOKS=[
+{id:1,title:"Mental Health & Mindfulness",tagline:"Rewire Your Mind. Reclaim Your Peace.",icon:"🧠",pal:0,cat:"mind",price:"$6.99",pn:6.99,desc:"A powerful guide to improving mental wellbeing through evidence-based mindfulness, meditation, and cognitive techniques."},
+{id:2,title:"Nutrition & Diet",tagline:"Fuel Your Body. Nourish Your Life.",icon:"🥗",pal:1,cat:"nutrition",price:"$6.99",pn:6.99,desc:"Everything you need to eat for optimal health — macronutrients, gut health, anti-inflammatory eating, and mindful nutrition."},
+{id:3,title:"Fitness & Movement",tagline:"Move with Purpose. Train for Life.",icon:"🏃",pal:3,cat:"body",price:"$6.99",pn:6.99,desc:"A complete guide to sustainable fitness — cardio, strength training, flexibility, recovery, and movement."},
+{id:4,title:"Sleep & Recovery",tagline:"Rest Deeply. Recover Completely.",icon:"🌙",pal:4,cat:"lifestyle",price:"$6.99",pn:6.99,desc:"Unlock the power of quality sleep. Covers circadian rhythms, sleep disorders, and optimising recovery."},
+{id:5,title:"Holistic & Natural Healing",tagline:"Heal from Within. Thrive Naturally.",icon:"🌿",pal:5,cat:"lifestyle",price:"$6.99",pn:6.99,desc:"An integrative exploration of herbal medicine, aromatherapy, Ayurveda, and Traditional Chinese Medicine."},
+{id:6,title:"Gut Health & Digestion",tagline:"Heal Your Gut. Transform Your Health.",icon:"⚗️",pal:3,cat:"nutrition",price:"$7.99",pn:7.99,desc:"How your gut influences immunity, mood, and total health. Covers the microbiome, leaky gut, and probiotics."},
+{id:7,title:"Women's Health & Hormones",tagline:"Balance Your Hormones. Own Your Vitality.",icon:"🌸",pal:6,cat:"hormones",price:"$7.99",pn:7.99,desc:"A comprehensive guide to female hormonal health — PCOS, endometriosis, fertility, and menopause."},
+{id:8,title:"Stress & Burnout Recovery",tagline:"Release the Pressure. Restore Your Energy.",icon:"🌊",pal:7,cat:"mind",price:"$7.99",pn:7.99,desc:"A science-backed guide to recovering from burnout — the nervous system, boundaries, and sustainable rest."},
+{id:9,title:"Healthy Ageing",tagline:"Age with Grace. Live with Vitality.",icon:"🍃",pal:5,cat:"body",price:"$7.99",pn:7.99,desc:"Evidence-based strategies for ageing well — longevity nutrition, brain health, and muscle preservation."},
+{id:10,title:"The Complete Wellness Lifestyle",tagline:"Integrate Everything. Live Your Best Life.",icon:"⭐",pal:9,cat:"lifestyle",price:"$7.99",pn:7.99,desc:"The master guide — weaving together nutrition, movement, sleep, relationships, and purpose."},
+{id:11,title:"Heart Health",tagline:"Protect Your Heart. Extend Your Life.",icon:"❤️",pal:6,cat:"body",price:"$7.99",pn:7.99,desc:"Protect your cardiovascular system — the DASH diet, heart-rate training, and stress management."},
+{id:12,title:"Diabetes Prevention",tagline:"Balance Your Blood Sugar. Reclaim Your Energy.",icon:"⚡",pal:7,cat:"nutrition",price:"$7.99",pn:7.99,desc:"Preventing and managing type 2 diabetes through blood sugar management and lifestyle medicine."},
+{id:13,title:"Cancer Prevention",tagline:"Reduce Your Risk. Strengthen Your Defences.",icon:"🛡️",pal:2,cat:"body",price:"$8.99",pn:8.99,desc:"Research-based strategies for reducing cancer risk through diet, exercise, and immune support."},
+{id:14,title:"Immune System Mastery",tagline:"Strengthen Your Defences. Fight Back Naturally.",icon:"🔋",pal:0,cat:"body",price:"$7.99",pn:7.99,desc:"Optimising your immune system through nutrition, sleep, exercise, and gut health."},
+{id:15,title:"Bone & Joint Health",tagline:"Build Strength from the Inside Out.",icon:"🦴",pal:8,cat:"body",price:"$7.99",pn:7.99,desc:"Prevent osteoporosis, manage arthritis, and keep joints healthy through nutrition and exercise."},
+{id:16,title:"Brain Health & Cognition",tagline:"Sharpen Your Mind. Future-Proof Your Brain.",icon:"💡",pal:9,cat:"mind",price:"$8.99",pn:8.99,desc:"Optimise brain performance and protect against decline through the MIND diet, exercise, and sleep."},
+{id:17,title:"Respiratory Health",tagline:"Breathe Better. Live Fully.",icon:"💨",pal:7,cat:"body",price:"$7.99",pn:7.99,desc:"Lung health, breathing optimisation, and respiratory conditions — from asthma to breathwork."},
+{id:18,title:"Skin Health & Beauty",tagline:"Glow from Within. Nourish Your Skin.",icon:"✨",pal:6,cat:"hormones",price:"$7.99",pn:7.99,desc:"An inside-out approach to radiant skin — the skin microbiome, nutrition, and hormonal acne."},
+{id:19,title:"Eye Health & Vision",tagline:"See Clearly. Protect Your Sight for Life.",icon:"👁️",pal:4,cat:"body",price:"$7.99",pn:7.99,desc:"Nutrition for vision, digital eye strain, and age-related conditions."},
+{id:20,title:"Dental & Oral Health",tagline:"A Healthy Mouth. A Healthier Body.",icon:"🦷",pal:1,cat:"body",price:"$7.99",pn:7.99,desc:"The mouth-body connection, the oral microbiome, and advanced dental hygiene."},
+{id:21,title:"Weight Loss Science",tagline:"Understand Your Body. Lose Weight for Good.",icon:"⚖️",pal:3,cat:"nutrition",price:"$8.99",pn:8.99,desc:"The science of sustainable weight loss — hormonal regulation and adaptive thermogenesis."},
+{id:22,title:"Chronic Pain Management",tagline:"Break the Pain Cycle. Reclaim Your Life.",icon:"💙",pal:2,cat:"mind",price:"$8.99",pn:8.99,desc:"Managing chronic pain through movement, mindfulness, nutrition, and evidence-based therapies."},
+{id:23,title:"Men's Health & Vitality",tagline:"Own Your Health. Live with Purpose.",icon:"💪",pal:4,cat:"hormones",price:"$7.99",pn:7.99,desc:"A guide to men's health — testosterone, prostate health, cardiovascular risk, and mental health."},
+{id:24,title:"Children's Health",tagline:"Raise Healthy Kids. Build Healthy Futures.",icon:"🌟",pal:5,cat:"lifestyle",price:"$7.99",pn:7.99,desc:"Evidence-based guidance on childhood nutrition, movement, sleep, and mental health."},
+{id:25,title:"Pregnancy & Postnatal Health",tagline:"Nurture Yourself. Welcome New Life.",icon:"🤱",pal:6,cat:"hormones",price:"$8.99",pn:8.99,desc:"Pregnancy and postnatal care — prenatal nutrition, movement, and mental health."},
+{id:26,title:"Addiction Recovery",tagline:"Break Free. Rebuild Your Life.",icon:"🌅",pal:7,cat:"mind",price:"$8.99",pn:8.99,desc:"Understanding addiction, navigating recovery, and building a meaningful life."},
+{id:27,title:"Thyroid Health",tagline:"Balance Your Metabolism. Reclaim Your Energy.",icon:"🦋",pal:3,cat:"hormones",price:"$7.99",pn:7.99,desc:"Hypothyroidism, hyperthyroidism, Hashimoto's, and Graves' disease — a complete guide."},
+{id:28,title:"The Gut Healing Diet",tagline:"Transform Your Gut. Transform Your Life.",icon:"🌱",pal:8,cat:"nutrition",price:"$8.99",pn:8.99,desc:"A dietary protocol for healing the gut using the 4R Framework."},
+{id:29,title:"Anxiety Mastery",tagline:"Quiet the Noise. Find Your Calm.",icon:"🕊️",pal:2,cat:"mind",price:"$8.99",pn:8.99,desc:"Overcoming anxiety through CBT, breathwork, nervous system regulation, and lasting calm."},
+{id:30,title:"Emotional Intelligence",tagline:"Master Your Emotions. Elevate Your Life.",icon:"🧡",pal:3,cat:"mind",price:"$7.99",pn:7.99,desc:"All five components of emotional intelligence for better relationships and mental health."},
+{id:31,title:"Plant-Based Living",tagline:"Eat Plants. Heal Your Body.",icon:"🌾",pal:5,cat:"nutrition",price:"$7.99",pn:7.99,desc:"Plant-based eating — complete nutrition, meal planning, and athletic performance."},
+{id:32,title:"Fasting & Longevity",tagline:"Reset Your Cells. Extend Your Healthspan.",icon:"⏰",pal:1,cat:"lifestyle",price:"$8.99",pn:8.99,desc:"Intermittent fasting, autophagy, cellular repair, and longevity science."},
+{id:33,title:"The Microbiome Revolution",tagline:"Trillions of Allies. One Healthy You.",icon:"🔬",pal:0,cat:"nutrition",price:"$8.99",pn:8.99,desc:"The human microbiome — how to nurture it through diet, lifestyle, and supplementation."},
+{id:34,title:"Posture & Movement",tagline:"Stand Tall. Move Well. Feel Better.",icon:"🏛️",pal:8,cat:"body",price:"$7.99",pn:7.99,desc:"Correcting posture, functional movement, and eliminating pain through corrective exercises."},
+{id:35,title:"Energy & Fatigue",tagline:"Unlock Limitless Energy. Beat Fatigue for Good.",icon:"☀️",pal:3,cat:"lifestyle",price:"$8.99",pn:8.99,desc:"Resolving chronic fatigue through mitochondrial support and hormonal optimisation."},
+{id:36,title:"Mindful Living",tagline:"Be Present. Live Intentionally. Thrive.",icon:"🎋",pal:7,cat:"mind",price:"$7.99",pn:7.99,desc:"Mindfulness in every dimension of daily life — eating, relationships, work, and emotions."},
+{id:37,title:"Sports Nutrition",tagline:"Fuel Performance. Accelerate Recovery.",icon:"🏅",pal:3,cat:"nutrition",price:"$8.99",pn:8.99,desc:"A complete sports nutrition guide — fuelling, hydration, protein timing, and supplementation."},
+{id:38,title:"Spiritual Wellness",tagline:"Connect to What Matters. Live with Purpose.",icon:"✴️",pal:2,cat:"lifestyle",price:"$7.99",pn:7.99,desc:"Spirituality's health effects — gratitude, purpose, compassion, and meaning."},
+{id:39,title:"Environmental Health",tagline:"Clean Your World. Protect Your Body.",icon:"🌍",pal:5,cat:"lifestyle",price:"$8.99",pn:8.99,desc:"Reducing exposure to environmental threats — air, water, endocrine disruptors, and a healthy home."},
+{id:40,title:"Financial Wellness",tagline:"Money Mastery for a Healthier Life.",icon:"💛",pal:8,cat:"lifestyle",price:"$7.99",pn:7.99,desc:"The connection between financial wellbeing and health — building security and reducing money stress."},
+{id:41,title:"Flexibility & Yoga",tagline:"Bend Without Breaking. Flow with Life.",icon:"🌺",pal:6,cat:"body",price:"$7.99",pn:7.99,desc:"Flexibility and yoga — fascia, major styles, yoga for pain and mental health."},
+{id:42,title:"High Performance Habits",tagline:"Optimise Your Life. Achieve Your Potential.",icon:"🚀",pal:9,cat:"lifestyle",price:"$8.99",pn:8.99,desc:"The neuroscience of peak performance — morning routines, deep work, flow states."},
+{id:43,title:"The Gut-Brain Connection",tagline:"Heal Your Gut. Transform Your Mind.",icon:"🧬",pal:8,cat:"mind",price:"$9.99",pn:9.99,desc:"The gut-brain axis — how gut bacteria produce neurotransmitters and nutritional psychiatry."},
+{id:44,title:"Longevity & Biohacking",tagline:"Hack Your Biology. Live Longer. Live Better.",icon:"🔮",pal:7,cat:"lifestyle",price:"$9.99",pn:9.99,desc:"Longevity science and biohacking — NAD+, autophagy, wearables, hormesis, and personalised optimisation."},
+{id:45,title:"Trauma & Healing",tagline:"Acknowledge the Wound. Begin the Healing.",icon:"💜",pal:2,cat:"mind",price:"$9.99",pn:9.99,desc:"Trauma science and healing — EMDR, somatic experiencing, and post-traumatic growth."},
+{id:46,title:"Cooking for Health",tagline:"Transform Your Kitchen. Transform Your Health.",icon:"🍳",pal:3,cat:"nutrition",price:"$7.99",pn:7.99,desc:"Anti-inflammatory cooking, fermentation, and meal prep for a healing kitchen."},
+{id:47,title:"Perimenopause & Menopause",tagline:"Navigate the Change. Thrive on the Other Side.",icon:"🌙",pal:6,cat:"hormones",price:"$9.99",pn:9.99,desc:"Perimenopause and menopause — HRT, natural alternatives, and reclaiming vitality."},
+{id:48,title:"Breaking Sugar Addiction",tagline:"Free Yourself from Sugar. Reclaim Your Health.",icon:"🍯",pal:3,cat:"nutrition",price:"$7.99",pn:7.99,desc:"The neuroscience of sugar addiction and a protocol for reducing sugar and rebuilding health."},
+{id:49,title:"Work-Life Balance",tagline:"Boundaries that Protect. A Life that Fulfils.",icon:"⚖️",pal:7,cat:"lifestyle",price:"$7.99",pn:7.99,desc:"Work-life harmony through boundary-setting, time management, and energising life design."},
+{id:50,title:"The Complete Body Reset",tagline:"Start Over. Transform Completely. Thrive.",icon:"🔄",pal:9,cat:"lifestyle",price:"$9.99",pn:9.99,desc:"A comprehensive 30-90 day reset — detoxification, gut healing, hormonal rebalancing."},
+];
+
+function chapters(b){return[{t:"Introduction: "+b.tagline.split('.')[0],free:true},{t:"Understanding the Foundations"},{t:"The Science Behind It"},{t:"Your Body, Your Blueprint"},{t:"Common Mistakes & How to Fix Them"},{t:"The 7-Day Kickstart Plan"},{t:"Nutrition & Lifestyle Adjustments"},{t:"Mental & Emotional Wellbeing"},{t:"Advanced Strategies"},{t:"Your Lifelong Journey"}];}
+
+function palGrad(b){var bc=BOOK_COVERS_JS[b.id];if(bc) return bc.bg;var p=PALETTES[b.pal||0];if(!p) return 'linear-gradient(135deg,#2C3240,#3D4558)';return 'linear-gradient(160deg,'+p[2]+' 0%,'+p[1]+' 50%,'+p[0]+' 100%)';}
+function palColor(b,i){return PALETTES[b.pal][i||0];}
+
+var cb=null,cc=0,purchased=[];
+function owns(id){return true;} // DEMO: all owned
+function _loggedOut(){
+  document.getElementById("navAuth").innerHTML='<div style="background:#B8924A;color:white;padding:6px 16px;border-radius:20px;font-size:0.75rem;font-weight:700;font-family:Poppins,sans-serif;letter-spacing:0.06em;">✦ DEMO — All Books Unlocked</div>';
+  renderBooks();
+}
+function loadPurchases(){renderBooks();}
+function savePurchases(){} // no-op in demo
+
+// CATEGORY ART HTML
+// DEMO: purchased managed by owns() override
+var BOOK_COVERS_JS={
+  1:{bg:'linear-gradient(145deg,#1C2B3A,#2E4560,#1A3048)'},
+  2:{bg:'linear-gradient(150deg,#1A2E1A,#2D4A2A,#1E3820)'},
+  3:{bg:'linear-gradient(160deg,#3A1A0A,#5C2E14,#3A1E0E)'},
+  4:{bg:'linear-gradient(150deg,#0A1428,#142244,#0C1A38)'},
+  5:{bg:'linear-gradient(155deg,#1A2810,#2E4018,#1E3014)'},
+  6:{bg:'linear-gradient(145deg,#2E1A08,#4A2E10,#2E2010)'},
+  7:{bg:'linear-gradient(150deg,#2E0E1E,#48182E,#340C22)'},
+  8:{bg:'linear-gradient(155deg,#081E2E,#103248,#0A2438)'},
+  9:{bg:'linear-gradient(145deg,#102010,#1C341C,#142818)'},
+  10:{bg:'linear-gradient(160deg,#2A2010,#44341A,#2E2814)'},
+  11:{bg:'linear-gradient(145deg,#2E0808,#480E0E,#340A0A)'},
+  12:{bg:'linear-gradient(150deg,#081E2A,#103248,#0C2438)'},
+  13:{bg:'linear-gradient(155deg,#180A28,#281440,#1C0C32)'},
+  14:{bg:'linear-gradient(145deg,#0C2210,#163818,#101C10)'},
+  15:{bg:'linear-gradient(150deg,#101820,#1C2A34,#141E28)'},
+  16:{bg:'linear-gradient(155deg,#080E28,#101840,#0A1230)'},
+  17:{bg:'linear-gradient(145deg,#082018,#103428,#0C2820)'},
+  18:{bg:'linear-gradient(150deg,#2E0818,#481028,#341020)'},
+  19:{bg:'linear-gradient(155deg,#081428,#102040,#0C1830)'},
+  20:{bg:'linear-gradient(145deg,#0A1E20,#143034,#0E2428)'},
+  21:{bg:'linear-gradient(150deg,#2A1008,#441A10,#2E1410)'},
+  22:{bg:'linear-gradient(155deg,#0E0C28,#181440,#100E30)'},
+  23:{bg:'linear-gradient(145deg,#08101E,#101C34,#0C1428)'},
+  24:{bg:'linear-gradient(150deg,#28200A,#403410,#2C2810)'},
+  25:{bg:'linear-gradient(155deg,#280A18,#401028,#2C0C1E)'},
+  26:{bg:'linear-gradient(145deg,#081C14,#102E20,#0C2018)'},
+  27:{bg:'linear-gradient(150deg,#281408,#401E08,#2C1A0C)'},
+  28:{bg:'linear-gradient(155deg,#1C1008,#2E1C10,#201410)'},
+  29:{bg:'linear-gradient(145deg,#100C28,#1C1440,#140E30)'},
+  30:{bg:'linear-gradient(150deg,#281408,#40200C,#2E1A0C)'},
+  31:{bg:'linear-gradient(155deg,#0E1C08,#182E10,#101E0C)'},
+  32:{bg:'linear-gradient(145deg,#081C1E,#102E32,#0C2028)'},
+  33:{bg:'linear-gradient(150deg,#081C18,#102E28,#0C2020)'},
+  34:{bg:'linear-gradient(155deg,#101418,#1C2028,#141820)'},
+  35:{bg:'linear-gradient(145deg,#281E08,#40300C,#2C2810)'},
+  36:{bg:'linear-gradient(150deg,#081C18,#102E28,#0A2420)'},
+  37:{bg:'linear-gradient(155deg,#2E0E08,#481610,#34100C)'},
+  38:{bg:'linear-gradient(145deg,#160C28,#221440,#180E30)'},
+  39:{bg:'linear-gradient(150deg,#0A1808,#141E0E,#0E1E0C)'},
+  40:{bg:'linear-gradient(155deg,#1E1C08,#302C0C,#242010)'},
+  41:{bg:'linear-gradient(145deg,#200A1A,#34102A,#280C20)'},
+  42:{bg:'linear-gradient(150deg,#080C28,#101440,#0C1030)'},
+  43:{bg:'linear-gradient(155deg,#180E08,#28180E,#1C1210)'},
+  44:{bg:'linear-gradient(145deg,#081A18,#0E2C28,#0A2020)'},
+  45:{bg:'linear-gradient(150deg,#160A28,#221040,#1A0C30)'},
+  46:{bg:'linear-gradient(155deg,#280A04,#40100A,#300C08)'},
+  47:{bg:'linear-gradient(145deg,#24081A,#38102A,#2C0C20)'},
+  48:{bg:'linear-gradient(150deg,#281408,#401E0A,#2E180C)'},
+  49:{bg:'linear-gradient(155deg,#081C18,#102E28,#0C2420)'},
+  50:{bg:'linear-gradient(145deg,#201808,#34280C,#281E0C)'},
+};
+
+var BOOK_ART={
+  1:'<div class=\"bcard-cover-art-deco\" style=\"width:75px;height:75px;border:1.5px solid rgba(126,184,212,0.2);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 16px rgba(126,184,212,0.06),0 0 0 32px rgba(126,184,212,0.03);\"></div><span class=\"bcard-cover-art-icon\">🧠</span>',
+  2:'<div class=\"bcard-cover-art-deco\" style=\"width:50px;height:70px;border:1px solid rgba(126,200,126,0.2);border-radius:50% 0 50% 0;top:50%;left:50%;transform:translate(-50%,-58%) rotate(-20deg);\"></div><span class=\"bcard-cover-art-icon\">🥗</span>',
+  3:'<div class=\"bcard-cover-art-deco\" style=\"width:80%;height:2px;background:rgba(232,148,106,0.2);top:38%;left:10%;box-shadow:0 10px 0 rgba(232,148,106,0.2),0 20px 0 rgba(232,148,106,0.12)\"></div><span class=\"bcard-cover-art-icon\">🏃</span>',
+  4:'<div class=\"bcard-cover-art-deco\" style=\"width:6px;height:6px;border-radius:50%;background:rgba(112,144,212,0.15);top:25%;left:30%;box-shadow:20px 12px 0 rgba(112,144,212,0.15),40px 5px 0 rgba(112,144,212,0.15),-10px 28px 0 rgba(112,144,212,0.15),35px 30px 0 rgba(112,144,212,0.15),10px 45px 0 rgba(112,144,212,0.15)\"></div><span class=\"bcard-cover-art-icon\">🌙</span>',
+  5:'<div class=\"bcard-cover-art-deco\" style=\"width:65px;height:65px;border:1.5px solid rgba(140,190,106,0.2);border-radius:50% 0;top:50%;left:50%;transform:translate(-50%,-50%) rotate(45deg);box-shadow:0 0 0 12px rgba(140,190,106,0.06)\"></div><span class=\"bcard-cover-art-icon\">🌿</span>',
+  6:'<div class=\"bcard-cover-art-deco\" style=\"width:75px;height:75px;border:1.5px solid rgba(212,144,74,0.2);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 16px rgba(212,144,74,0.06),0 0 0 32px rgba(212,144,74,0.03);\"></div><span class=\"bcard-cover-art-icon\">⚗️</span>',
+  7:'<div class=\"bcard-cover-art-deco\" style=\"width:65px;height:65px;border:1.5px solid rgba(224,112,142,0.2);border-radius:50% 0;top:50%;left:50%;transform:translate(-50%,-50%) rotate(45deg);box-shadow:0 0 0 12px rgba(224,112,142,0.06)\"></div><span class=\"bcard-cover-art-icon\">🌸</span>',
+  8:'<div class=\"bcard-cover-art-deco\" style=\"width:80%;height:2px;background:rgba(92,170,200,0.2);top:38%;left:10%;box-shadow:0 10px 0 rgba(92,170,200,0.2),0 20px 0 rgba(92,170,200,0.12)\"></div><span class=\"bcard-cover-art-icon\">🌊</span>',
+  9:'<div class=\"bcard-cover-art-deco\" style=\"width:50px;height:70px;border:1px solid rgba(120,188,120,0.2);border-radius:50% 0 50% 0;top:50%;left:50%;transform:translate(-50%,-58%) rotate(-20deg);\"></div><span class=\"bcard-cover-art-icon\">🍃</span>',
+  10:'<div class=\"bcard-cover-art-deco\" style=\"width:55px;height:55px;border:1.5px solid rgba(200,168,90,0.25);transform:rotate(45deg) translate(-50%,-50%);top:50%;left:50%;transform-origin:top left;\"></div><span class=\"bcard-cover-art-icon\">⭐</span>',
+  11:'<div class=\"bcard-cover-art-deco\" style=\"width:75px;height:75px;border:1.5px solid rgba(224,96,96,0.2);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 16px rgba(224,96,96,0.06),0 0 0 32px rgba(224,96,96,0.03);\"></div><span class=\"bcard-cover-art-icon\">❤️</span>',
+  12:'<div class=\"bcard-cover-art-deco\" style=\"width:55px;height:55px;border:1.5px solid rgba(80,168,192,0.2);transform:rotate(45deg) translate(-50%,-50%);top:50%;left:50%;transform-origin:top left;\"></div><span class=\"bcard-cover-art-icon\">⚡</span>',
+  13:'<div class=\"bcard-cover-art-deco\" style=\"width:0;height:0;border-left:40px solid transparent;border-right:40px solid transparent;border-bottom:68px solid rgba(152,112,192,0.2);top:18%;left:50%;transform:translateX(-50%);\"></div><span class=\"bcard-cover-art-icon\">🛡️</span>',
+  14:'<div class=\"bcard-cover-art-deco\" style=\"width:75px;height:75px;border:1.5px solid rgba(96,168,96,0.2);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 16px rgba(96,168,96,0.06),0 0 0 32px rgba(96,168,96,0.03);\"></div><span class=\"bcard-cover-art-icon\">🔋</span>',
+  15:'<div class=\"bcard-cover-art-deco\" style=\"width:60px;height:60px;border:1.5px solid rgba(112,144,160,0.2);border-radius:4px;top:50%;left:50%;transform:translate(-50%,-50%) rotate(15deg);\"></div><span class=\"bcard-cover-art-icon\">🦴</span>',
+  16:'<div class=\"bcard-cover-art-deco\" style=\"width:55px;height:55px;border:1.5px solid rgba(96,112,192,0.25);transform:rotate(45deg) translate(-50%,-50%);top:50%;left:50%;transform-origin:top left;\"></div><span class=\"bcard-cover-art-icon\">💡</span>',
+  17:'<div class=\"bcard-cover-art-deco\" style=\"width:80%;height:2px;background:rgba(80,160,144,0.2);top:38%;left:10%;box-shadow:0 10px 0 rgba(80,160,144,0.2),0 20px 0 rgba(80,160,144,0.12)\"></div><span class=\"bcard-cover-art-icon\">💨</span>',
+  18:'<div class=\"bcard-cover-art-deco\" style=\"width:65px;height:65px;border:1.5px solid rgba(212,96,128,0.2);border-radius:50% 0;top:50%;left:50%;transform:translate(-50%,-50%) rotate(45deg);box-shadow:0 0 0 12px rgba(212,96,128,0.06)\"></div><span class=\"bcard-cover-art-icon\">✨</span>',
+  19:'<div class=\"bcard-cover-art-deco\" style=\"width:75px;height:75px;border:1.5px solid rgba(88,120,192,0.2);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 16px rgba(88,120,192,0.06),0 0 0 32px rgba(88,120,192,0.03);\"></div><span class=\"bcard-cover-art-icon\">👁️</span>',
+  20:'<div class=\"bcard-cover-art-deco\" style=\"width:60px;height:60px;border:1.5px solid rgba(80,164,172,0.2);border-radius:4px;top:50%;left:50%;transform:translate(-50%,-50%) rotate(15deg);\"></div><span class=\"bcard-cover-art-icon\">🦷</span>',
+  21:'<div class=\"bcard-cover-art-deco\" style=\"width:55px;height:55px;border:1.5px solid rgba(208,112,80,0.2);transform:rotate(45deg) translate(-50%,-50%);top:50%;left:50%;transform-origin:top left;\"></div><span class=\"bcard-cover-art-icon\">⚖️</span>',
+  22:'<div class=\"bcard-cover-art-deco\" style=\"width:80%;height:2px;background:rgba(136,128,192,0.2);top:38%;left:10%;box-shadow:0 10px 0 rgba(136,128,192,0.2),0 20px 0 rgba(136,128,192,0.12)\"></div><span class=\"bcard-cover-art-icon\">💙</span>',
+  23:'<div class=\"bcard-cover-art-deco\" style=\"width:0;height:0;border-left:40px solid transparent;border-right:40px solid transparent;border-bottom:68px solid rgba(88,112,168,0.2);top:18%;left:50%;transform:translateX(-50%);\"></div><span class=\"bcard-cover-art-icon\">💪</span>',
+  24:'<div class=\"bcard-cover-art-deco\" style=\"width:6px;height:6px;border-radius:50%;background:rgba(192,160,64,0.25);top:25%;left:30%;box-shadow:20px 12px 0 rgba(192,160,64,0.25),40px 5px 0 rgba(192,160,64,0.125),-10px 28px 0 rgba(192,160,64,0.155),35px 30px 0 rgba(192,160,64,0.15),10px 45px 0 rgba(192,160,64,0.085)\"></div><span class=\"bcard-cover-art-icon\">🌟</span>',
+  25:'<div class=\"bcard-cover-art-deco\" style=\"width:65px;height:65px;border:1.5px solid rgba(192,96,128,0.2);border-radius:50% 0;top:50%;left:50%;transform:translate(-50%,-50%) rotate(45deg);box-shadow:0 0 0 12px rgba(192,96,128,0.06)\"></div><span class=\"bcard-cover-art-icon\">🤱</span>',
+  26:'<div class=\"bcard-cover-art-deco\" style=\"width:80%;height:2px;background:rgba(80,152,112,0.2);top:38%;left:10%;box-shadow:0 10px 0 rgba(80,152,112,0.2),0 20px 0 rgba(80,152,112,0.12)\"></div><span class=\"bcard-cover-art-icon\">🌅</span>',
+  27:'<div class=\"bcard-cover-art-deco\" style=\"width:65px;height:65px;border:1.5px solid rgba(192,136,48,0.2);border-radius:50% 0;top:50%;left:50%;transform:translate(-50%,-50%) rotate(45deg);box-shadow:0 0 0 12px rgba(192,136,48,0.06)\"></div><span class=\"bcard-cover-art-icon\">🦋</span>',
+  28:'<div class=\"bcard-cover-art-deco\" style=\"width:50px;height:70px;border:1px solid rgba(160,120,96,0.2);border-radius:50% 0 50% 0;top:50%;left:50%;transform:translate(-50%,-58%) rotate(-20deg);\"></div><span class=\"bcard-cover-art-icon\">🌱</span>',
+  29:'<div class=\"bcard-cover-art-deco\" style=\"width:75px;height:75px;border:1.5px solid rgba(144,136,192,0.2);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 16px rgba(144,136,192,0.06),0 0 0 32px rgba(144,136,192,0.03);\"></div><span class=\"bcard-cover-art-icon\">🕊️</span>',
+  30:'<div class=\"bcard-cover-art-deco\" style=\"width:55px;height:55px;border:1.5px solid rgba(200,136,64,0.25);transform:rotate(45deg) translate(-50%,-50%);top:50%;left:50%;transform-origin:top left;\"></div><span class=\"bcard-cover-art-icon\">🧡</span>',
+  31:'<div class=\"bcard-cover-art-deco\" style=\"width:50px;height:70px;border:1px solid rgba(112,160,80,0.2);border-radius:50% 0 50% 0;top:50%;left:50%;transform:translate(-50%,-58%) rotate(-20deg);\"></div><span class=\"bcard-cover-art-icon\">🌾</span>',
+  32:'<div class=\"bcard-cover-art-deco\" style=\"width:60px;height:60px;border:1.5px solid rgba(80,160,168,0.2);border-radius:4px;top:50%;left:50%;transform:translate(-50%,-50%) rotate(15deg);\"></div><span class=\"bcard-cover-art-icon\">⏰</span>',
+  33:'<div class=\"bcard-cover-art-deco\" style=\"width:75px;height:75px;border:1.5px solid rgba(80,152,140,0.2);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 16px rgba(80,152,140,0.06),0 0 0 32px rgba(80,152,140,0.03);\"></div><span class=\"bcard-cover-art-icon\">🔬</span>',
+  34:'<div class=\"bcard-cover-art-deco\" style=\"width:60px;height:60px;border:1.5px solid rgba(112,120,144,0.2);border-radius:4px;top:50%;left:50%;transform:translate(-50%,-50%) rotate(15deg);\"></div><span class=\"bcard-cover-art-icon\">🏛️</span>',
+  35:'<div class=\"bcard-cover-art-deco\" style=\"width:55px;height:55px;border:1.5px solid rgba(192,160,48,0.3);transform:rotate(45deg) translate(-50%,-50%);top:50%;left:50%;transform-origin:top left;\"></div><span class=\"bcard-cover-art-icon\">☀️</span>',
+  36:'<div class=\"bcard-cover-art-deco\" style=\"width:80%;height:2px;background:rgba(112,196,184,0.2);top:38%;left:10%;box-shadow:0 10px 0 rgba(112,196,184,0.2),0 20px 0 rgba(112,196,184,0.12)\"></div><span class=\"bcard-cover-art-icon\">🎋</span>',
+  37:'<div class=\"bcard-cover-art-deco\" style=\"width:0;height:0;border-left:40px solid transparent;border-right:40px solid transparent;border-bottom:68px solid rgba(208,96,72,0.2);top:18%;left:50%;transform:translateX(-50%);\"></div><span class=\"bcard-cover-art-icon\">🏅</span>',
+  38:'<div class=\"bcard-cover-art-deco\" style=\"width:6px;height:6px;border-radius:50%;background:rgba(168,136,200,0.2);top:25%;left:30%;box-shadow:20px 12px 0 rgba(168,136,200,0.2),40px 5px 0 rgba(168,136,200,0.12),-10px 28px 0 rgba(168,136,200,0.15),35px 30px 0 rgba(168,136,200,0.1),10px 45px 0 rgba(168,136,200,0.08)\"></div><span class=\"bcard-cover-art-icon\">✴️</span>',
+  39:'<div class=\"bcard-cover-art-deco\" style=\"width:75px;height:75px;border:1.5px solid rgba(96,128,80,0.2);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 16px rgba(96,128,80,0.06),0 0 0 32px rgba(96,128,80,0.03);\"></div><span class=\"bcard-cover-art-icon\">🌍</span>',
+  40:'<div class=\"bcard-cover-art-deco\" style=\"width:55px;height:55px;border:1.5px solid rgba(176,160,48,0.25);transform:rotate(45deg) translate(-50%,-50%);top:50%;left:50%;transform-origin:top left;\"></div><span class=\"bcard-cover-art-icon\">💛</span>',
+  41:'<div class=\"bcard-cover-art-deco\" style=\"width:65px;height:65px;border:1.5px solid rgba(192,96,144,0.2);border-radius:50% 0;top:50%;left:50%;transform:translate(-50%,-50%) rotate(45deg);box-shadow:0 0 0 12px rgba(192,96,144,0.06)\"></div><span class=\"bcard-cover-art-icon\">🌺</span>',
+  42:'<div class=\"bcard-cover-art-deco\" style=\"width:0;height:0;border-left:40px solid transparent;border-right:40px solid transparent;border-bottom:68px solid rgba(96,104,192,0.25);top:18%;left:50%;transform:translateX(-50%);\"></div><span class=\"bcard-cover-art-icon\">🚀</span>',
+  43:'<div class=\"bcard-cover-art-deco\" style=\"width:60px;height:60px;border:1.5px solid rgba(160,124,96,0.2);border-radius:4px;top:50%;left:50%;transform:translate(-50%,-50%) rotate(15deg);\"></div><span class=\"bcard-cover-art-icon\">🧬</span>',
+  44:'<div class=\"bcard-cover-art-deco\" style=\"width:6px;height:6px;border-radius:50%;background:rgba(72,160,144,0.25);top:25%;left:30%;box-shadow:20px 12px 0 rgba(72,160,144,0.25),40px 5px 0 rgba(72,160,144,0.125),-10px 28px 0 rgba(72,160,144,0.155),35px 30px 0 rgba(72,160,144,0.15),10px 45px 0 rgba(72,160,144,0.085)\"></div><span class=\"bcard-cover-art-icon\">🔮</span>',
+  45:'<div class=\"bcard-cover-art-deco\" style=\"width:80%;height:2px;background:rgba(152,112,184,0.2);top:38%;left:10%;box-shadow:0 10px 0 rgba(152,112,184,0.2),0 20px 0 rgba(152,112,184,0.12)\"></div><span class=\"bcard-cover-art-icon\">💜</span>',
+  46:'<div class=\"bcard-cover-art-deco\" style=\"width:75px;height:75px;border:1.5px solid rgba(208,96,80,0.2);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 16px rgba(208,96,80,0.06),0 0 0 32px rgba(208,96,80,0.03);\"></div><span class=\"bcard-cover-art-icon\">🍳</span>',
+  47:'<div class=\"bcard-cover-art-deco\" style=\"width:65px;height:65px;border:1.5px solid rgba(192,88,136,0.2);border-radius:50% 0;top:50%;left:50%;transform:translate(-50%,-50%) rotate(45deg);box-shadow:0 0 0 12px rgba(192,88,136,0.06)\"></div><span class=\"bcard-cover-art-icon\">🌙</span>',
+  48:'<div class=\"bcard-cover-art-deco\" style=\"width:75px;height:75px;border:1.5px solid rgba(200,144,64,0.25);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 16px rgba(200,144,64,0.065),0 0 0 32px rgba(200,144,64,0.035);\"></div><span class=\"bcard-cover-art-icon\">🍯</span>',
+  49:'<div class=\"bcard-cover-art-deco\" style=\"width:60px;height:60px;border:1.5px solid rgba(80,152,138,0.2);border-radius:4px;top:50%;left:50%;transform:translate(-50%,-50%) rotate(15deg);\"></div><span class=\"bcard-cover-art-icon\">⚖️</span>',
+  50:'<div class=\"bcard-cover-art-deco\" style=\"width:55px;height:55px;border:1.5px solid rgba(192,168,64,0.3);transform:rotate(45deg) translate(-50%,-50%);top:50%;left:50%;transform-origin:top left;\"></div><span class=\"bcard-cover-art-icon\">🔄</span>',
+};
+
+// RENDER BOOKS
+function renderBooks(cat){
+  var list=cat&&cat!=='all'?BOOKS.filter(function(b){return b.cat===cat;}):BOOKS;
+  document.getElementById('booksGrid').innerHTML=list.map(function(b){
+    var o=owns(b.id);
+    var art=BOOK_ART[b.id]||'<span class="bcard-cover-art-icon">'+b.icon+'</span>';
+    return '<div class="bcard" onclick="openDetail('+b.id+')">' +
+      '<div class="bcard-cover book-'+b.id+'">' +
+        '<div class="bcard-cover-inner">' +
+          '<div class="bcard-cover-art">' +
+            art +
+            '<div class="bcard-cover-art-fade"></div>' +
+          '</div>' +
+          '<div class="bcard-cover-text">' +
+            '<div class="bcard-cover-rule"></div>' +
+            '<div class="bcard-cover-cat">'+b.cat+'</div>' +
+            '<div class="bcard-cover-title">'+b.title+'</div>' +
+            '<div class="bcard-cover-tagline">'+b.tagline+'</div>' +
+            '<div class="bcard-cover-foot">' +
+              '<span class="bcard-cover-brand">Luminae</span>' +
+              '<span class="bcard-cover-price">'+b.price+'</span>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        (o?'<div class="bcard-owned-bar"><div class="bcard-owned-tick">✓</div>In Your Library</div>':'') +
+      '</div>' +
+      '<div class="bcard-meta"><div class="bcard-title">'+b.title+'</div></div>' +
+    '</div>';
+  }).join('');
+}
+
+function filterBks(cat,btn){
+  document.querySelectorAll('.f-btn').forEach(function(b){b.classList.remove('on');});
+  if(btn)btn.classList.add('on');
+  renderBooks(cat);
+}
+
+// DETAIL
+function detBuyAction(){
+  if(owns(cb.id)){ closeDetail(); openReader(cb.id,0); }
+  else buyBook();
+}
+function openDetail(id){
+  var b=BOOKS.find(function(x){return x.id===id;});if(!b)return;
+  cb=b;
+  var o=owns(b.id);
+  // Banner
+  var banner=document.getElementById('detBanner');
+  var bc=BOOK_COVERS_JS[b.id];
+  banner.style.background=bc?bc.bg:palGrad(b);
+  document.getElementById('detIcon').textContent=b.icon;
+  document.getElementById('detBannerTitle').textContent=b.title;
+  // Body
+  document.getElementById('detCat').textContent=b.cat.toUpperCase();
+  document.getElementById('detTitle').textContent=b.title;
+  document.getElementById('detCatSpan').textContent=b.cat;
+  document.getElementById('detPrice').textContent=b.price;
+  document.getElementById('detDesc').textContent=b.desc;
+  // Includes pills
+  document.getElementById('detIncludes').innerHTML=
+    '<div class="det-include-pill">📖 10 Chapters</div>'+
+    '<div class="det-include-pill">✓ Introduction</div>'+
+    '<div class="det-include-pill">📋 Contents Included</div>'+
+    '<div class="det-include-pill">⬇ Download</div>'+
+    '<div class="det-include-pill">♾ Lifetime Access</div>';
+  // Buttons
+  var buyBtn=document.getElementById('detBuyBtn');
+  var previewBtn=document.getElementById('detPreviewBtn');
+  if(o){
+    buyBtn.textContent='📖 Read Now';
+    buyBtn.className='det-buy-btn owned';
+    previewBtn.textContent='⬇ Download';
+    previewBtn.onclick=function(){downloadBook(b.id);};
+  } else {
+    buyBtn.innerHTML='🛒 Buy Now &nbsp;·&nbsp; '+b.price;
+    buyBtn.className='det-buy-btn';
+
+  }
+  document.getElementById('detailOv').classList.add('open');
+}
+function closeDetail(){document.getElementById('detailOv').classList.remove('open');}
+
+// CHAPTER CONTENT — luxury book reader style
+function makeToc(b){
+  var chs=chapters(b);
+  return '<span class="ct-eyebrow">Contents</span>' +
+    '<div class="ct-main-title">'+b.title+'</div>' +
+    '<div class="ct-main-sub">'+b.tagline+'</div>' +
+    '<span class="ct-sec">Chapters</span>' +
+    chs.map(function(c,i){
+      return '<div class="ct-toc-row"><span class="ct-toc-n">'+(i+1<10?'0'+(i+1):(i+1))+'</span><span class="ct-toc-t">'+c.t+'</span><span class="ct-toc-dots"></span><span class="ct-toc-pg">'+(7+i*14)+'</span></div>';
+    }).join('') +
+    '<span class="reader-rhead reader-rhead-l">Luminae · Wellness</span>' +
+    '<span class="reader-pnum reader-pnum-l">ii</span>';
+}
+
+function makeChOpener(b,idx){
+  var chs=chapters(b);
+  var roman=['I','II','III','IV','V','VI','VII','VIII','IX','X'];
+  return '<div class="ct-ch-wrap">' +
+    '<div class="ct-ch-bg">'+roman[idx]+'</div>' +
+    '<div class="ct-ch-orn">· · ·</div>' +
+    '<span class="ct-ch-lbl">Chapter '+roman[idx]+'</span>' +
+    '<div class="ct-ch-rule"></div>' +
+    '<h2 class="ct-ch-title">'+chs[idx].t+'</h2>' +
+    '<p class="ct-ch-sub">'+b.tagline+'</p>' +
+    '<div class="ct-ch-ornb"><span></span><em>✦</em><span></span></div>' +
+    '</div>' +
+    '<span class="reader-pnum reader-pnum-l">'+(idx*2+2)+'</span>';
+}
+
+function makeContent(b,idx){
+  var t=b.title,tl=b.tagline,pg=(idx*2+3);
+  var pn='<span class="reader-pnum reader-pnum-r">'+pg+'</span>';
+  var rh='<span class="reader-rhead reader-rhead-r">'+t+'</span>';
+  var c=[
+    rh+'<p class="ct-body drop">Welcome to <em>'+t+'</em> — your complete guide to this dimension of health. Every page has been crafted to give you clarity, confidence, and results grounded in current science.</p><p class="ct-body">This is not generic advice. Every recommendation is drawn from peer-reviewed research, designed to integrate into real life. Small, consistent actions compound into lasting transformation.</p><div class="ct-note"><p>Keep a journal close as you read. The insights you capture become your personal roadmap to lasting wellbeing.</p></div><div class="ct-rule-div"><span></span><em>✦</em><span></span></div><h3 class="ct-h2">How to Use This Book</h3><p class="ct-body">Read each chapter in sequence. The content builds deliberately — later chapters assume foundations laid in earlier ones. Return to specific sections as your practice deepens.</p>'+pn,
+    rh+'<p class="ct-body drop">Before strategies, we need foundations. '+t+' is a coherent system built on understanding how the human body and mind work together. Lasting change requires addressing root causes, not surface symptoms.</p><div class="ct-note"><p>Your body is deeply adaptive. Given the right conditions, it knows how to heal, optimise, and thrive. Your role is to create those conditions — consistently.</p></div><h3 class="ct-h2">The Four Pillars</h3><p class="ct-body">Personalisation. Root-cause focus. Sustainability. Evidence. These four pillars underpin every recommendation in this book. Without them, even the best advice fails.</p>'+pn,
+    rh+'<p class="ct-body drop">The science of '+t.toLowerCase()+' has advanced dramatically in recent decades. Research from Harvard, Stanford, and Oxford demonstrates that lifestyle interventions can equal pharmaceutical outcomes — without the side effects.</p><div class="ct-note"><p>The most powerful predictor of health outcomes is not genetics. It is the daily choices you make. You have far more control than you realise.</p></div><h3 class="ct-h2">What the Evidence Shows</h3><p class="ct-body">Epigenetics reveals that lifestyle alters gene expression within weeks. Neuroplasticity confirms the brain rewires at any age. The gut microbiome shapes mood, immunity, and metabolism in ways science is only beginning to understand.</p>'+pn,
+    rh+'<p class="ct-body drop">No two people are the same. Your unique genetics, microbiome, stress history, sleep patterns, and nutritional status create a health blueprint unlike anyone else. Effective transformation begins with honest self-knowledge.</p><div class="ct-note"><p>Before any protocol, assess your daily energy patterns, sleep quality, digestive health, mood stability, stress responses, and physical vitality. This baseline is your compass.</p></div><h3 class="ct-h2">Identifying Your Priorities</h3><p class="ct-body">Where does your energy deplete first? Which symptoms recur most persistently? What has worked for you before, even partially? These questions have more diagnostic value than any generic health test.</p>'+pn,
+    rh+'<p class="ct-body drop">After studying thousands of cases, certain patterns emerge consistently among those who struggle to sustain change. These are not character flaws — they are predictable responses to incorrect information and misguided strategies.</p><div class="ct-note"><p>The most common mistake: attempting to change everything at once. This creates overwhelm, early burnout, and the false conclusion that transformation is impossible. Strategic sequencing — not willpower — is the answer.</p></div><h3 class="ct-h2">The Critical Errors</h3><p class="ct-body">Neglecting sleep. All-or-nothing thinking. Ignoring chronic stress. Comparing your journey to another journey. Each undermines even the most sound health strategy. Recognising them is the first step beyond them.</p>'+pn,
+    rh+'<p class="ct-body drop">The first seven days are about momentum, not perfection. Each day introduces one manageable change. By the seventh day, you will feel a perceptible shift — and that shift becomes self-sustaining motivation.</p><h3 class="ct-h2">Days One and Two</h3><p class="ct-body">A consistent sleep and wake time — held even on weekends. Two to three litres of filtered water daily. A ten-minute walk after your largest meal. Simple. Foundational. Effective.</p><div class="ct-rule-div"><span></span><em>✦</em><span></span></div><h3 class="ct-h2">Days Three Through Seven</h3><p class="ct-body">A five-minute morning breathing practice. Protein at every meal. Screens off sixty minutes before sleep. These additions create the conditions for lasting change.</p>'+pn,
+    rh+'<p class="ct-body drop">Food is information. Every meal sends thousands of molecular signals to your cells — influencing gene expression, hormone production, inflammation, and energy. Eating intentionally is among the highest-leverage choices available to you.</p><div class="ct-note"><p>Eat mostly whole, minimally processed foods. Add colour and variety. Reduce ultra-processed products, added sugars, and inflammatory seed oils. Everything else is refinement.</p></div><h3 class="ct-h2">Foods to Prioritise</h3><p class="ct-body">Fatty fish two to three times weekly. Dark leafy greens daily. Fermented foods — yoghurt, kefir, kimchi. Polyphenol-rich berries and colourful fruits. Walnuts, flaxseed, and chia seeds. These are not trends — they are the most consistently supported foods in the literature.</p>'+pn,
+    rh+'<p class="ct-body drop">The mind and body are not separate systems — they are one integrated whole in constant bidirectional communication. Addressing mental and emotional wellbeing is central to physical health, not peripheral to it.</p><div class="ct-note"><p>A daily ten-minute mindfulness or breathing practice reduces cortisol, improves heart rate variability, and produces measurable structural changes in the brain within eight weeks of consistent practice.</p></div><h3 class="ct-h2">Practical Foundations</h3><p class="ct-body">Name your emotions without judgment — awareness precedes regulation. Box breathing activates the parasympathetic system within minutes. Protect your social connections; loneliness carries equivalent health risk to smoking fifteen cigarettes daily.</p>'+pn,
+    rh+'<p class="ct-body drop">With foundations in place, advanced strategies create exponential rather than linear gains. These are the refinements practised by those who have moved beyond health maintenance into genuine optimisation.</p><h3 class="ct-h2">Biofeedback and Tracking</h3><p class="ct-body">What is measured is managed. Wearables, continuous glucose monitors, and regular bloodwork remove guesswork and enable rapid personalisation. Data transforms general advice into individual precision.</p><div class="ct-rule-div"><span></span><em>✦</em><span></span></div><h3 class="ct-h2">Hormetic Stress</h3><p class="ct-body">Cold exposure, heat therapy, high-intensity intervals, and time-restricted eating build cellular resilience through controlled, beneficial stress. Begin with thirty seconds of cold water at the end of your shower.</p>'+pn,
+    rh+'<p class="ct-body drop">This is not an ending. It is a beginning. Health is not a destination at which you arrive. It is a practice you inhabit — daily, imperfectly, with growing wisdom and self-compassion.</p><div class="ct-note"><p>Ask yourself: who do you want to be in ten years? What does that person do each day? Begin doing that today — not perfectly, but consistently. The compound effect will do the rest.</p></div><h3 class="ct-h2">Your Continuing Practice</h3><p class="ct-body">Return to this book quarterly. Reassess your baselines every six months. Share what you have learned with those you love. Stay curious — the science of wellbeing continues to evolve, and so will you.</p><div class="ct-rule-div"><span></span><em>✦</em><span></span></div><p class="ct-body" style="font-style:italic;color:#B8924A;font-size:0.85rem;">Your most luminous life begins here. — Luminae</p>'+pn
+  ];
+  return c[idx]||c[0];
+}
+
+var currentSpread=0;
+
+
+// READER FUNCTIONS
+var CHAPTERS=[], currentChapter=0, isFlipping=false;
+
+function buildChapters(b){
+  var chs=chapters(b);
+  CHAPTERS=[];
+  CHAPTERS.push({label:'TOC',  title:'Table of Contents', free:true,  type:'toc'});
+  CHAPTERS.push({label:'Intro',title:'Introduction',       free:true,  type:'intro'});
+  chs.forEach(function(c,i){
+    CHAPTERS.push({label:'Ch '+(i+1), title:c.t, free:(i===0), type:'chapter', idx:i});
+  });
+}
+
+function getPageContent(b, idx){
+  var c=CHAPTERS[idx];
+  if(!c) return '';
+  if(!c.free && !owns(b.id)){
+    return '<div class="rdr-lock">'+
+      '<div class="rdr-lock-icon">🔒</div>'+
+      '<h3>Locked</h3>'+
+      '<p>Purchase this book to unlock all chapters.</p>'+
+      '<button class="rdr-lock-btn" onclick="buyBook()">Buy — '+b.price+'</button>'+
+      '<p class="rdr-lock-note">One-time · Own forever</p>'+
+      '</div>';
+  }
+  if(c.type==='toc')   return getTOC(b);
+  if(c.type==='intro') return getIntro(b);
+  return getChapter(b, c.idx);
+}
+
+function getTOC(b){
+  var chs=chapters(b);
+  return '<div class="rdr-toc-page">'+
+    '<span class="rdr-ch-eyebrow">Luminae Wellness</span>'+
+    '<div class="rdr-ch-title">Contents</div>'+
+    '<div class="rdr-rule"><span></span><em>✦</em><span></span></div>'+
+    '<div class="rdr-toc-row"><span class="rdr-toc-n">序</span><span class="rdr-toc-t">Introduction</span><span class="rdr-toc-dots"></span><span class="rdr-toc-pg">iii</span></div>'+
+    chs.map(function(c,i){
+      return '<div class="rdr-toc-row"><span class="rdr-toc-n">'+(i<9?'0':'')+(i+1)+'</span><span class="rdr-toc-t">'+c.t+'</span><span class="rdr-toc-dots"></span><span class="rdr-toc-pg">'+(7+i*14)+'</span></div>';
+    }).join('')+
+    '</div>'+
+    '<span class="reader-pnum reader-pnum-r">ii</span>';
+}
+
+function getIntro(b){
+  return '<span class="rdr-ch-eyebrow">Introduction</span>'+
+    '<div class="rdr-ch-title">A Note Before You Begin</div>'+
+    '<div class="rdr-ch-sub">On the practice of beginning</div>'+
+    '<div class="rdr-rule"><span></span><em>✦</em><span></span></div>'+
+    '<p class="rdr-p drop">This book was written for you — not the version who has everything figured out, but the one who is simply ready to begin. Whatever brought you here, you have arrived at the right place.</p>'+
+    '<p class="rdr-p">We live in an age of overwhelming health information. Conflicting advice fills every screen and shelf. In the midst of that noise, something essential gets lost: the simple truth that your body already knows how to heal. It simply needs the right conditions, the right knowledge, and the right support.</p>'+
+    '<p class="rdr-p">That is precisely what <em>'+b.title+'</em> was created to provide.</p>'+
+    '<div class="rdr-tip"><div class="rdr-tip-label">✦ What Makes This Different</div><p>Every chapter is grounded in peer-reviewed science — not trends or opinions. We have distilled thousands of studies into clear, actionable guidance you can apply today.</p></div>'+
+    '<div class="rdr-h2" style="font-family:Cormorant Garamond,serif;font-size:1rem;font-weight:600;color:#2A2018;margin:18px 0 8px;">How This Book Is Structured</div>'+
+    '<p class="rdr-p">This book moves from foundation to practice to integration. Read in order the first time, then return to specific sections as reference. Each chapter builds on the last.</p>'+
+    '<div class="rdr-h2" style="font-family:Cormorant Garamond,serif;font-size:1rem;font-weight:600;color:#2A2018;margin:18px 0 8px;">A Word About Pace</div>'+
+    '<p class="rdr-p">One of the most common mistakes is trying to do everything at once. Small, consistent actions compound into extraordinary results. One meaningful change, sustained over three months, will do more for your health than twenty changes abandoned after two weeks.</p>'+
+    '<div class="rdr-rule"><span></span><em>✦</em><span></span></div>'+
+    '<p class="rdr-p">We are honoured to be part of your journey.</p>'+
+    '<p class="rdr-p" style="font-style:italic;color:#B8924A;">— The Luminae Wellness Team</p>';
+}
+
+function getChapter(b, idx){
+  var fn=CC[idx]||CC[0];
+  return fn(b);
+}
+
+function renderCurrentPage(){
+  var b=cb;
+  var front=document.getElementById('readerPage');
+  var back=document.getElementById('readerPageBack');
+  if(front) front.innerHTML=getPageContent(b, currentChapter);
+  if(back)  back.innerHTML=getPageContent(b, currentChapter+1)||'';
+  // update info
+  var c=CHAPTERS[currentChapter];
+  if(c) document.getElementById('readerInfo').textContent=c.label;
+  document.getElementById('readerCount').textContent=(currentChapter+1)+' / '+CHAPTERS.length;
+  document.getElementById('readerPrev').disabled=(currentChapter===0);
+  document.getElementById('readerNext').disabled=(currentChapter>=CHAPTERS.length-1);
+  // dots
+  var dots=document.getElementById('readerDots');
+  if(dots) dots.innerHTML=CHAPTERS.map(function(_,i){
+    return '<div class="reader-dot'+(i===currentChapter?' on':'')+'" onclick="jumpTo('+i+')"></div>';
+  }).join('');
+}
+
+function flipPage(dir){
+  if(isFlipping) return;
+  var next=currentChapter+dir;
+  if(next<0||next>=CHAPTERS.length) return;
+  isFlipping=true;
+  var stage=document.getElementById('readerStage');
+  var cls=dir>0?'flip-fwd':'flip-bck';
+  // Pre-load the destination into back
+  var back=document.getElementById('readerPageBack');
+  if(back) back.innerHTML=getPageContent(cb, next)||'';
+  stage.classList.add(cls);
+  setTimeout(function(){
+    stage.classList.remove(cls);
+    // reset transform
+    stage.style.transform = dir>0 ? 'rotateY(-180deg)' : 'rotateY(0deg)';
+    currentChapter=next;
+    stage.style.transform='';
+    renderCurrentPage();
+    isFlipping=false;
+  }, 620);
+}
+
+function jumpTo(idx){
+  if(isFlipping) return;
+  currentChapter=idx;
+  renderCurrentPage();
+}
+
+function buildSidebar(b){
+  var sb=document.getElementById('readerSidebar');
+  if(sb) sb.innerHTML='';
+}
+
+function openReader(id, startIdx){
+  var b=BOOKS.find(function(x){return x.id===id;});
+  if(!b) return;
+  cb=b;
+  buildChapters(b);
+  currentChapter=startIdx?Math.min(startIdx+1,CHAPTERS.length-1):0;
+  document.getElementById('readerTitle').textContent=b.title;
+  renderCurrentPage();
+  document.getElementById('readerOv').classList.add('open');
+}
+
+function closeReader(){ document.getElementById('readerOv').classList.remove('open'); }
+function goChapter(idx){ jumpTo(idx+2); }
+function renderChapter(b,idx){ jumpTo(idx+2); }
+function renderSidebar(){}
+
+// BUY
+function buyBook(){
+  if(!currentUser){openAuth('signup');showToast('Sign in to purchase');return;}
+  if(!cb)return;
+  var link=STRIPE[cb.pn];
+  if(link){showToast('Redirecting to checkout…');setTimeout(function(){window.location.href=link;},500);}
+}
+
+// DOWNLOAD
+function downloadBook(id){
+  var b=BOOKS.find(function(x){return x.id===id;});
+  if(!b||!owns(id)){showToast('Purchase this book first.');return;}
+  showToast('Preparing your download…');
+  var chs=chapters(b);var bc=BOOK_COVERS_JS[b.id];var bg=bc?bc.bg:'linear-gradient(135deg,#2C3240,#3D4558)';
+  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>'+b.title+' — Luminae Wellness</title>' +
+  '<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Lato:wght@300;400&display=swap" rel="stylesheet">' +
+  '<style>body{font-family:\'Lato\',sans-serif;max-width:720px;margin:0 auto;padding:40px 24px;color:#1A1A2E;line-height:1.85;background:#FAFFFE}' +
+  '.cover{background:'+bg+';border-radius:20px;padding:60px 40px;text-align:center;margin-bottom:48px}' +
+  '.cover-icon{font-size:5rem;display:block;margin-bottom:20px}' +
+  '.cover-title{font-family:\'Poppins\',sans-serif;font-size:2.2rem;font-weight:800;color:white;margin-bottom:10px}' +
+  '.cover-tag{font-size:1rem;color:rgba(255,255,255,0.7);font-style:italic;margin-bottom:20px}' +
+  '.cover-author{font-size:0.8rem;color:rgba(255,255,255,0.5);font-weight:600;letter-spacing:0.1em;text-transform:uppercase}' +
+  'h1{font-family:\'Poppins\',sans-serif;font-size:1.9rem;font-weight:800;color:#1A1A2E;margin:48px 0 12px;border-top:2px solid #A8D5BA;padding-top:36px}' +
+  'h2{font-family:\'Poppins\',sans-serif;font-size:1.15rem;font-weight:700;color:#2E8B57;margin:28px 0 10px}' +
+  'p{margin-bottom:16px;color:#3D3D5C;font-size:0.95rem}' +
+  '.tip{background:#EEF8F3;border-left:4px solid #2E8B57;padding:16px 20px;border-radius:0 10px 10px 0;margin:20px 0}' +
+  '.tip-label{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#2E8B57;margin-bottom:6px;font-family:\'Poppins\',sans-serif}' +
+  'ul{list-style:none;margin:12px 0 20px}ul li{padding:8px 0 8px 24px;position:relative;border-bottom:1px solid #EDE8DF;font-size:0.9rem;color:#3D3D5C}ul li::before{content:"✓";position:absolute;left:0;color:#2E8B57;font-weight:700}' +
+  '.foot{margin-top:60px;padding:24px;background:#EEF8F3;border-radius:12px;text-align:center;color:#6B6B8A;font-size:0.78rem}</style></head><body>' +
+  '<div class="cover"><span class="cover-icon">'+b.icon+'</span><div class="cover-title">'+b.title+'</div><div class="cover-tag">'+b.tagline+'</div><div class="cover-author">by Luminae Wellness</div></div>';
+  for(var i=0;i<chs.length;i++){
+    var fn=CC[i]||CC[0];
+    var raw=fn(b);
+    raw=raw.replace(/class="rp-ch-label"/g,'style="display:none"')
+      .replace(/class="rp-h1"/g,'')
+      .replace(/class="rp-h2"/g,'')
+      .replace(/class="rp-tagline"/g,'style="color:#2E8B57;font-style:italic;margin-bottom:24px;font-size:1rem"')
+      .replace(/class="rp-p"/g,'')
+      .replace(/<div class="rp-tip">[\s\S]*?<div class="rp-tip-label">/g,'<div class="tip"><div class="tip-label">')
+      .replace(/class="rp-tip-label"/g,'class="tip-label"')
+      .replace(/class="rp-list"/g,'')
+      .replace(/class="rp-list li"/g,'');
+    html+='<h1>Chapter '+(i+1)+': '+chs[i].t+'</h1>'+raw;
+  }
+  html+='<div class="foot">Thank you for purchasing from Luminae Wellness Library 🌿</div></body></html>';
+  var blob=new Blob([html],{type:'text/html'});var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');a.href=url;a.download=b.title.replace(/[^a-z0-9]/gi,'_')+'_Luminae.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  showToast('Downloading: '+b.title);
+}
+
+// LIBRARY
+function openLibrary(){document.getElementById('libOv').classList.add('open');renderLibrary();}
+function closeLibrary(){document.getElementById('libOv').classList.remove('open');}
+function renderLibrary(){
+  var list=BOOKS.filter(function(b){return owns(b.id);});
+  document.getElementById('libSub').textContent=list.length?list.length+' book'+(list.length!==1?'s':''):'Your purchased books';
+  document.getElementById('libEmpty').style.display=list.length?'none':'block';
+  document.getElementById('libGrid').style.display=list.length?'grid':'none';
+  document.getElementById('libGrid').innerHTML=list.map(function(b){
+    return '<div class="lb"><div class="lb-cover" style="background:'+palGrad(b)+'" onclick="closeLibrary();openReader('+b.id+',0)">' +
+      '<div class="lb-inner"><div class="lb-icon">'+b.icon+'</div><div class="lb-name">'+b.title+'</div></div></div>' +
+      '<div class="lb-btns"><button class="lb-btn lb-read" onclick="closeLibrary();openReader('+b.id+',0)">Read</button>' +
+      '<button class="lb-btn lb-dl" onclick="downloadBook('+b.id+')">Download</button></div></div>';
+  }).join('');
+}
+
+// SEARCH
+function openSearch(){document.getElementById('srchOv').classList.add('open');setTimeout(function(){document.getElementById('srchInp').focus();},60);}
+function closeSearch(){document.getElementById('srchOv').classList.remove('open');document.getElementById('srchResults').innerHTML='';document.getElementById('srchInp').value='';}
+function runSearch(q){
+  var el=document.getElementById('srchResults');
+  if(!q||q.length<2){el.innerHTML='';return;}
+  var hits=BOOKS.filter(function(b){return(b.title+' '+b.tagline+' '+b.desc+' '+b.cat).toLowerCase().indexOf(q.toLowerCase())!==-1;});
+  if(!hits.length){el.innerHTML='<div class="srch-empty">No results found.</div>';return;}
+  el.innerHTML=hits.map(function(b){
+    return '<div class="srch-item" onclick="closeSearch();openDetail('+b.id+')">' +
+      '<div class="srch-ik" style="background:'+palGrad(b)+'">'+b.icon+'</div>' +
+      '<div style="flex:1"><div class="srch-name">'+b.title+'</div><div class="srch-cat">'+b.cat+'</div></div>' +
+      '<div class="srch-price">'+b.price+'</div></div>';
+  }).join('');
+}
+
+// FAQ + NAV
+function toggleFaq(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open');}
+function toggleMob(){document.getElementById('mobNav').classList.toggle('open');}
+function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},3200);}
+
+// KEYBOARD
+document.addEventListener('keydown',function(e){
+  if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();openSearch();}
+  if(e.key==='Escape'){closeSearch();closeDetail();closeLibrary();}
+});
+
+// REVEAL
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('vis');});},{threshold:0.07});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+renderBooks();
+
+// HERO SHOWCASE — show 4 real book covers
+(function(){
+  var picks=[BOOKS[0],BOOKS[6],BOOKS[15],BOOKS[43]];
+  var el=document.getElementById('heroShowcase');
+  if(!el) return;
+  el.innerHTML=picks.map(function(b){
+    var bc=BOOK_COVERS_JS[b.id];
+    var bg=bc?bc.bg:'linear-gradient(160deg,#2C3240,#3D4558)';
+    var art=BOOK_ART[b.id]||('<span style="font-size:2rem;">'+b.icon+'</span>');
+    return '<div class="hbs-book" onclick="openDetail('+b.id+')" style="background:#1A1612">'+
+      '<div class="hbs-inner">'+
+        '<div class="hbs-art" style="background:'+bg+'">'+
+          art+
+          '<div class="hbs-art-fade" style="background:linear-gradient(to bottom,transparent,rgba(0,0,0,0.4))"></div>'+
+        '</div>'+
+        '<div class="hbs-text" style="background:#1A1612;color:#E8DFD0;">'+
+          '<div class="hbs-rule" style="background:rgba(212,176,106,0.6)"></div>'+
+          '<div class="hbs-cat" style="color:rgba(212,176,106,0.6)">'+b.cat+'</div>'+
+          '<div class="hbs-title">'+b.title+'</div>'+
+          '<div class="hbs-price" style="color:rgba(212,176,106,0.7)">'+b.price+'</div>'+
+        '</div>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+})();
+
+// AUTH + SUPABASE
+var SUPA='https://cnuvtnnemwjfjafllgbh.supabase.co';
+var SKEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNudXZ0bm5lbXdqZmphZmxsZ2JoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4OTIyNTMsImV4cCI6MjA4ODQ2ODI1M30.gm7mprHxMUqmD1kO5AVnc3cVYEFkKvGex2an4Wfm0eQ';
+var currentUser=null,currentToken=null;
+
+function sf(path,method,body,token){
+  return fetch(SUPA+path,{method:method||'GET',headers:{'Content-Type':'application/json','apikey':SKEY,'Authorization':'Bearer '+(token||SKEY)},body:body?JSON.stringify(body):undefined}).then(function(r){return r.json();});
+}
+function openAuth(m){
+  document.getElementById('authOv').classList.add('open');
+  if(m==='login'){document.getElementById('authLogin').style.display='';document.getElementById('authSignup').style.display='none';}
+  else{document.getElementById('authSignup').style.display='';document.getElementById('authLogin').style.display='none';}
+}
+function closeAuth(){document.getElementById('authOv').classList.remove('open');}
+function showLogin(){document.getElementById('authLogin').style.display='';document.getElementById('authSignup').style.display='none';}
+function showSignup(){document.getElementById('authSignup').style.display='';document.getElementById('authLogin').style.display='none';}
+
+function _loggedIn(user,token){
+  currentUser=user;currentToken=token;
+  document.getElementById('navAuth').innerHTML=
+    '<div class="nav-user-area"><span class="nav-email">'+user.email+'</span>' +
+    '<button class="nav-lib" onclick="openLibrary()">My Library</button>' +
+    '<button class="nav-out" onclick="doSignout()">Sign out</button></div>';
+  var ml=document.getElementById('mobLibBtn'),ma=document.getElementById('mobAuthBtn');
+  if(ml)ml.style.display='';if(ma)ma.style.display='none';
+  loadPurchases(user.id,token);
+}
+function _loggedOut(){
+  currentUser=null;currentToken=null;
+  document.getElementById('navAuth').innerHTML='<button class="nav-cta" onclick="openAuth(\'signup\')">Sign In</button>';
+  var ml=document.getElementById('mobLibBtn'),ma=document.getElementById('mobAuthBtn');
+  if(ml)ml.style.display='none';if(ma){ma.style.display='';ma.textContent='Sign In';}
+  purchased=[];renderBooks();
+}
+function loadPurchases(uid,token){
+  purchased=[];renderBooks();
+  sf('/rest/v1/purchases?user_id=eq.'+uid+'&select=book_ids','GET',null,token)
+    .then(function(r){purchased=(r&&r[0]&&r[0].book_ids)?r[0].book_ids:[];renderBooks();})
+    .catch(function(){renderBooks();});
+}
+function savePurchases(){
+  if(!currentUser||!currentToken)return;
+  var uid=currentUser.id,tok=currentToken,nb=purchased.slice();
+  fetch(SUPA+'/rest/v1/purchases?user_id=eq.'+uid+'&select=book_ids',{headers:{'apikey':SKEY,'Authorization':'Bearer '+tok}})
+    .then(function(r){return r.json();})
+    .then(function(rows){
+      var ex=(rows&&rows[0]&&rows[0].book_ids)?rows[0].book_ids:[];
+      ex.forEach(function(id){if(nb.indexOf(id)===-1)nb.push(id);});
+      nb.forEach(function(id){if(purchased.indexOf(id)===-1)purchased.push(id);});
+      var has=rows&&rows.length>0;
+      var sh={'Content-Type':'application/json','apikey':SKEY,'Authorization':'Bearer '+tok,'Prefer':'return=minimal'};
+      var m=has?'PATCH':'POST',u=has?SUPA+'/rest/v1/purchases?user_id=eq.'+uid:SUPA+'/rest/v1/purchases';
+      fetch(u,{method:m,headers:sh,body:has?JSON.stringify({book_ids:nb}):JSON.stringify({user_id:uid,book_ids:nb})})
+        .then(function(r){if(r.status>=200&&r.status<300)renderBooks();else r.text().then(function(t){alert('Save error '+r.status+': '+t.slice(0,100));});});
+    });
+}
+function doSignup(){
+  var name=document.getElementById('signupName').value.trim(),email=document.getElementById('signupEmail').value.trim(),pass=document.getElementById('signupPass').value;
+  var err=document.getElementById('signupErr'),ok=document.getElementById('signupOk');
+  err.classList.remove('show');ok.classList.remove('show');
+  if(!email||!pass){err.textContent='Please fill in all fields.';err.classList.add('show');return;}
+  sf('/auth/v1/signup','POST',{email:email,password:pass,data:{full_name:name}})
+    .then(function(r){
+      if(r.error){err.textContent=r.error.message;err.classList.add('show');return;}
+      if(r.user&&r.access_token){
+        try{localStorage.setItem('luminae_token',r.access_token);localStorage.setItem('luminae_user',JSON.stringify(r.user));if(r.refresh_token)localStorage.setItem('luminae_refresh',r.refresh_token);}catch(e){}
+        closeAuth();_loggedIn(r.user,r.access_token);
+      } else {ok.textContent='Check your email to confirm your account.';ok.classList.add('show');}
+    }).catch(function(){err.textContent='Network error. Please try again.';err.classList.add('show');});
+}
+function doLogin(){
+  var email=document.getElementById('loginEmail').value.trim(),pass=document.getElementById('loginPass').value;
+  var err=document.getElementById('loginErr');err.classList.remove('show');
+  if(!email||!pass){err.textContent='Please fill in all fields.';err.classList.add('show');return;}
+  sf('/auth/v1/token?grant_type=password','POST',{email:email,password:pass})
+    .then(function(r){
+      if(r.error||!r.access_token){err.textContent=r.error_description||'Sign in failed.';err.classList.add('show');return;}
+      try{localStorage.setItem('luminae_token',r.access_token);localStorage.setItem('luminae_user',JSON.stringify(r.user));if(r.refresh_token)localStorage.setItem('luminae_refresh',r.refresh_token);}catch(e){}
+      closeAuth();_loggedIn(r.user,r.access_token);
+    }).catch(function(){err.textContent='Network error.';err.classList.add('show');});
+}
+function doSignout(){
+  try{localStorage.removeItem('luminae_token');localStorage.removeItem('luminae_user');localStorage.removeItem('luminae_refresh');}catch(e){}
+  _loggedOut();showToast('Signed out successfully.');
+}
+
+// AUTO LOGIN disabled in demo
+
+document.addEventListener('keydown',function(e){
+  if(e.key==='Enter'&&document.getElementById('authOv').classList.contains('open')){
+    if(document.getElementById('authLogin').style.display!=='none')doLogin();else doSignup();
+  }
+});
+</script>
+</body>
+</html>
