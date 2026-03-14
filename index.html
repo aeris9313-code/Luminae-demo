@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luminae — DEMO (All Books Unlocked)</title>
+<title>Luminae — Free Wellness Library</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=Lato:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Cinzel:wght@400;500;600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
@@ -841,11 +841,11 @@ img{max-width:100%;}
   </div>
   <div class="nav-right">
     <button class="nav-search" onclick="openSearch()" title="Search">⌕</button>
-    <div id="navAuth"><div style="background:#B8924A;color:white;padding:6px 16px;border-radius:20px;font-size:0.75rem;font-weight:700;font-family:Poppins,sans-serif;letter-spacing:0.06em;">✦ DEMO — All Books Unlocked</div></div>
+    <div id="navAuth"><div style="background:#B8924A;color:white;padding:6px 16px;border-radius:20px;font-size:0.75rem;font-weight:700;font-family:Poppins,sans-serif;letter-spacing:0.06em;">✦ FREE — All Books Unlocked</div></div>
   </div>
   <button class="ham" onclick="toggleMob()">☰</button>
 </nav>
-<div style="background:linear-gradient(135deg,#B8924A,#D4B06A);color:white;text-align:center;padding:8px 20px;font-size:0.76rem;font-weight:600;font-family:Poppins,sans-serif;letter-spacing:0.06em;position:fixed;top:52px;left:0;right:0;z-index:99;">✦ DEMO VERSION — All 50 books are unlocked for testing ✦</div>
+<div style="background:linear-gradient(135deg,#B8924A,#D4B06A);color:white;text-align:center;padding:8px 20px;font-size:0.76rem;font-weight:600;font-family:Poppins,sans-serif;letter-spacing:0.06em;position:fixed;top:52px;left:0;right:0;z-index:99;">✦ FREE VERSION — All 50 books are free to read ✦</div>
 <div class="mob-nav" id="mobNav">
   <a href="#library" class="mob-lnk" onclick="toggleMob()">Library</a>
   <a href="#about" class="mob-lnk" onclick="toggleMob()">About</a>
@@ -1081,56 +1081,56 @@ const PALETTES=[
 // Photos use CSS art
 
 const BOOKS=[
-{id:1,title:"Mental Health & Mindfulness",tagline:"Rewire Your Mind. Reclaim Your Peace.",icon:"🧠",pal:0,cat:"mind",price:"$6.99",pn:6.99,desc:"A powerful guide to improving mental wellbeing through evidence-based mindfulness, meditation, and cognitive techniques."},
-{id:2,title:"Nutrition & Diet",tagline:"Fuel Your Body. Nourish Your Life.",icon:"🥗",pal:1,cat:"nutrition",price:"$6.99",pn:6.99,desc:"Everything you need to eat for optimal health — macronutrients, gut health, anti-inflammatory eating, and mindful nutrition."},
-{id:3,title:"Fitness & Movement",tagline:"Move with Purpose. Train for Life.",icon:"🏃",pal:3,cat:"body",price:"$6.99",pn:6.99,desc:"A complete guide to sustainable fitness — cardio, strength training, flexibility, recovery, and movement."},
-{id:4,title:"Sleep & Recovery",tagline:"Rest Deeply. Recover Completely.",icon:"🌙",pal:4,cat:"lifestyle",price:"$6.99",pn:6.99,desc:"Unlock the power of quality sleep. Covers circadian rhythms, sleep disorders, and optimising recovery."},
-{id:5,title:"Holistic & Natural Healing",tagline:"Heal from Within. Thrive Naturally.",icon:"🌿",pal:5,cat:"lifestyle",price:"$6.99",pn:6.99,desc:"An integrative exploration of herbal medicine, aromatherapy, Ayurveda, and Traditional Chinese Medicine."},
-{id:6,title:"Gut Health & Digestion",tagline:"Heal Your Gut. Transform Your Health.",icon:"⚗️",pal:3,cat:"nutrition",price:"$7.99",pn:7.99,desc:"How your gut influences immunity, mood, and total health. Covers the microbiome, leaky gut, and probiotics."},
-{id:7,title:"Women's Health & Hormones",tagline:"Balance Your Hormones. Own Your Vitality.",icon:"🌸",pal:6,cat:"hormones",price:"$7.99",pn:7.99,desc:"A comprehensive guide to female hormonal health — PCOS, endometriosis, fertility, and menopause."},
-{id:8,title:"Stress & Burnout Recovery",tagline:"Release the Pressure. Restore Your Energy.",icon:"🌊",pal:7,cat:"mind",price:"$7.99",pn:7.99,desc:"A science-backed guide to recovering from burnout — the nervous system, boundaries, and sustainable rest."},
-{id:9,title:"Healthy Ageing",tagline:"Age with Grace. Live with Vitality.",icon:"🍃",pal:5,cat:"body",price:"$7.99",pn:7.99,desc:"Evidence-based strategies for ageing well — longevity nutrition, brain health, and muscle preservation."},
-{id:10,title:"The Complete Wellness Lifestyle",tagline:"Integrate Everything. Live Your Best Life.",icon:"⭐",pal:9,cat:"lifestyle",price:"$7.99",pn:7.99,desc:"The master guide — weaving together nutrition, movement, sleep, relationships, and purpose."},
-{id:11,title:"Heart Health",tagline:"Protect Your Heart. Extend Your Life.",icon:"❤️",pal:6,cat:"body",price:"$7.99",pn:7.99,desc:"Protect your cardiovascular system — the DASH diet, heart-rate training, and stress management."},
-{id:12,title:"Diabetes Prevention",tagline:"Balance Your Blood Sugar. Reclaim Your Energy.",icon:"⚡",pal:7,cat:"nutrition",price:"$7.99",pn:7.99,desc:"Preventing and managing type 2 diabetes through blood sugar management and lifestyle medicine."},
-{id:13,title:"Cancer Prevention",tagline:"Reduce Your Risk. Strengthen Your Defences.",icon:"🛡️",pal:2,cat:"body",price:"$8.99",pn:8.99,desc:"Research-based strategies for reducing cancer risk through diet, exercise, and immune support."},
-{id:14,title:"Immune System Mastery",tagline:"Strengthen Your Defences. Fight Back Naturally.",icon:"🔋",pal:0,cat:"body",price:"$7.99",pn:7.99,desc:"Optimising your immune system through nutrition, sleep, exercise, and gut health."},
-{id:15,title:"Bone & Joint Health",tagline:"Build Strength from the Inside Out.",icon:"🦴",pal:8,cat:"body",price:"$7.99",pn:7.99,desc:"Prevent osteoporosis, manage arthritis, and keep joints healthy through nutrition and exercise."},
-{id:16,title:"Brain Health & Cognition",tagline:"Sharpen Your Mind. Future-Proof Your Brain.",icon:"💡",pal:9,cat:"mind",price:"$8.99",pn:8.99,desc:"Optimise brain performance and protect against decline through the MIND diet, exercise, and sleep."},
-{id:17,title:"Respiratory Health",tagline:"Breathe Better. Live Fully.",icon:"💨",pal:7,cat:"body",price:"$7.99",pn:7.99,desc:"Lung health, breathing optimisation, and respiratory conditions — from asthma to breathwork."},
-{id:18,title:"Skin Health & Beauty",tagline:"Glow from Within. Nourish Your Skin.",icon:"✨",pal:6,cat:"hormones",price:"$7.99",pn:7.99,desc:"An inside-out approach to radiant skin — the skin microbiome, nutrition, and hormonal acne."},
-{id:19,title:"Eye Health & Vision",tagline:"See Clearly. Protect Your Sight for Life.",icon:"👁️",pal:4,cat:"body",price:"$7.99",pn:7.99,desc:"Nutrition for vision, digital eye strain, and age-related conditions."},
-{id:20,title:"Dental & Oral Health",tagline:"A Healthy Mouth. A Healthier Body.",icon:"🦷",pal:1,cat:"body",price:"$7.99",pn:7.99,desc:"The mouth-body connection, the oral microbiome, and advanced dental hygiene."},
-{id:21,title:"Weight Loss Science",tagline:"Understand Your Body. Lose Weight for Good.",icon:"⚖️",pal:3,cat:"nutrition",price:"$8.99",pn:8.99,desc:"The science of sustainable weight loss — hormonal regulation and adaptive thermogenesis."},
-{id:22,title:"Chronic Pain Management",tagline:"Break the Pain Cycle. Reclaim Your Life.",icon:"💙",pal:2,cat:"mind",price:"$8.99",pn:8.99,desc:"Managing chronic pain through movement, mindfulness, nutrition, and evidence-based therapies."},
-{id:23,title:"Men's Health & Vitality",tagline:"Own Your Health. Live with Purpose.",icon:"💪",pal:4,cat:"hormones",price:"$7.99",pn:7.99,desc:"A guide to men's health — testosterone, prostate health, cardiovascular risk, and mental health."},
-{id:24,title:"Children's Health",tagline:"Raise Healthy Kids. Build Healthy Futures.",icon:"🌟",pal:5,cat:"lifestyle",price:"$7.99",pn:7.99,desc:"Evidence-based guidance on childhood nutrition, movement, sleep, and mental health."},
-{id:25,title:"Pregnancy & Postnatal Health",tagline:"Nurture Yourself. Welcome New Life.",icon:"🤱",pal:6,cat:"hormones",price:"$8.99",pn:8.99,desc:"Pregnancy and postnatal care — prenatal nutrition, movement, and mental health."},
-{id:26,title:"Addiction Recovery",tagline:"Break Free. Rebuild Your Life.",icon:"🌅",pal:7,cat:"mind",price:"$8.99",pn:8.99,desc:"Understanding addiction, navigating recovery, and building a meaningful life."},
-{id:27,title:"Thyroid Health",tagline:"Balance Your Metabolism. Reclaim Your Energy.",icon:"🦋",pal:3,cat:"hormones",price:"$7.99",pn:7.99,desc:"Hypothyroidism, hyperthyroidism, Hashimoto's, and Graves' disease — a complete guide."},
-{id:28,title:"The Gut Healing Diet",tagline:"Transform Your Gut. Transform Your Life.",icon:"🌱",pal:8,cat:"nutrition",price:"$8.99",pn:8.99,desc:"A dietary protocol for healing the gut using the 4R Framework."},
-{id:29,title:"Anxiety Mastery",tagline:"Quiet the Noise. Find Your Calm.",icon:"🕊️",pal:2,cat:"mind",price:"$8.99",pn:8.99,desc:"Overcoming anxiety through CBT, breathwork, nervous system regulation, and lasting calm."},
-{id:30,title:"Emotional Intelligence",tagline:"Master Your Emotions. Elevate Your Life.",icon:"🧡",pal:3,cat:"mind",price:"$7.99",pn:7.99,desc:"All five components of emotional intelligence for better relationships and mental health."},
-{id:31,title:"Plant-Based Living",tagline:"Eat Plants. Heal Your Body.",icon:"🌾",pal:5,cat:"nutrition",price:"$7.99",pn:7.99,desc:"Plant-based eating — complete nutrition, meal planning, and athletic performance."},
-{id:32,title:"Fasting & Longevity",tagline:"Reset Your Cells. Extend Your Healthspan.",icon:"⏰",pal:1,cat:"lifestyle",price:"$8.99",pn:8.99,desc:"Intermittent fasting, autophagy, cellular repair, and longevity science."},
-{id:33,title:"The Microbiome Revolution",tagline:"Trillions of Allies. One Healthy You.",icon:"🔬",pal:0,cat:"nutrition",price:"$8.99",pn:8.99,desc:"The human microbiome — how to nurture it through diet, lifestyle, and supplementation."},
-{id:34,title:"Posture & Movement",tagline:"Stand Tall. Move Well. Feel Better.",icon:"🏛️",pal:8,cat:"body",price:"$7.99",pn:7.99,desc:"Correcting posture, functional movement, and eliminating pain through corrective exercises."},
-{id:35,title:"Energy & Fatigue",tagline:"Unlock Limitless Energy. Beat Fatigue for Good.",icon:"☀️",pal:3,cat:"lifestyle",price:"$8.99",pn:8.99,desc:"Resolving chronic fatigue through mitochondrial support and hormonal optimisation."},
-{id:36,title:"Mindful Living",tagline:"Be Present. Live Intentionally. Thrive.",icon:"🎋",pal:7,cat:"mind",price:"$7.99",pn:7.99,desc:"Mindfulness in every dimension of daily life — eating, relationships, work, and emotions."},
-{id:37,title:"Sports Nutrition",tagline:"Fuel Performance. Accelerate Recovery.",icon:"🏅",pal:3,cat:"nutrition",price:"$8.99",pn:8.99,desc:"A complete sports nutrition guide — fuelling, hydration, protein timing, and supplementation."},
-{id:38,title:"Spiritual Wellness",tagline:"Connect to What Matters. Live with Purpose.",icon:"✴️",pal:2,cat:"lifestyle",price:"$7.99",pn:7.99,desc:"Spirituality's health effects — gratitude, purpose, compassion, and meaning."},
-{id:39,title:"Environmental Health",tagline:"Clean Your World. Protect Your Body.",icon:"🌍",pal:5,cat:"lifestyle",price:"$8.99",pn:8.99,desc:"Reducing exposure to environmental threats — air, water, endocrine disruptors, and a healthy home."},
-{id:40,title:"Financial Wellness",tagline:"Money Mastery for a Healthier Life.",icon:"💛",pal:8,cat:"lifestyle",price:"$7.99",pn:7.99,desc:"The connection between financial wellbeing and health — building security and reducing money stress."},
-{id:41,title:"Flexibility & Yoga",tagline:"Bend Without Breaking. Flow with Life.",icon:"🌺",pal:6,cat:"body",price:"$7.99",pn:7.99,desc:"Flexibility and yoga — fascia, major styles, yoga for pain and mental health."},
-{id:42,title:"High Performance Habits",tagline:"Optimise Your Life. Achieve Your Potential.",icon:"🚀",pal:9,cat:"lifestyle",price:"$8.99",pn:8.99,desc:"The neuroscience of peak performance — morning routines, deep work, flow states."},
-{id:43,title:"The Gut-Brain Connection",tagline:"Heal Your Gut. Transform Your Mind.",icon:"🧬",pal:8,cat:"mind",price:"$9.99",pn:9.99,desc:"The gut-brain axis — how gut bacteria produce neurotransmitters and nutritional psychiatry."},
-{id:44,title:"Longevity & Biohacking",tagline:"Hack Your Biology. Live Longer. Live Better.",icon:"🔮",pal:7,cat:"lifestyle",price:"$9.99",pn:9.99,desc:"Longevity science and biohacking — NAD+, autophagy, wearables, hormesis, and personalised optimisation."},
-{id:45,title:"Trauma & Healing",tagline:"Acknowledge the Wound. Begin the Healing.",icon:"💜",pal:2,cat:"mind",price:"$9.99",pn:9.99,desc:"Trauma science and healing — EMDR, somatic experiencing, and post-traumatic growth."},
-{id:46,title:"Cooking for Health",tagline:"Transform Your Kitchen. Transform Your Health.",icon:"🍳",pal:3,cat:"nutrition",price:"$7.99",pn:7.99,desc:"Anti-inflammatory cooking, fermentation, and meal prep for a healing kitchen."},
-{id:47,title:"Perimenopause & Menopause",tagline:"Navigate the Change. Thrive on the Other Side.",icon:"🌙",pal:6,cat:"hormones",price:"$9.99",pn:9.99,desc:"Perimenopause and menopause — HRT, natural alternatives, and reclaiming vitality."},
-{id:48,title:"Breaking Sugar Addiction",tagline:"Free Yourself from Sugar. Reclaim Your Health.",icon:"🍯",pal:3,cat:"nutrition",price:"$7.99",pn:7.99,desc:"The neuroscience of sugar addiction and a protocol for reducing sugar and rebuilding health."},
-{id:49,title:"Work-Life Balance",tagline:"Boundaries that Protect. A Life that Fulfils.",icon:"⚖️",pal:7,cat:"lifestyle",price:"$7.99",pn:7.99,desc:"Work-life harmony through boundary-setting, time management, and energising life design."},
-{id:50,title:"The Complete Body Reset",tagline:"Start Over. Transform Completely. Thrive.",icon:"🔄",pal:9,cat:"lifestyle",price:"$9.99",pn:9.99,desc:"A comprehensive 30-90 day reset — detoxification, gut healing, hormonal rebalancing."},
+{id:1,title:"Mental Health & Mindfulness",tagline:"Rewire Your Mind. Reclaim Your Peace.",icon:"🧠",pal:0,cat:"mind",price:"$0.00",pn:0,desc:"A powerful guide to improving mental wellbeing through evidence-based mindfulness, meditation, and cognitive techniques."},
+{id:2,title:"Nutrition & Diet",tagline:"Fuel Your Body. Nourish Your Life.",icon:"🥗",pal:1,cat:"nutrition",price:"$0.00",pn:0,desc:"Everything you need to eat for optimal health — macronutrients, gut health, anti-inflammatory eating, and mindful nutrition."},
+{id:3,title:"Fitness & Movement",tagline:"Move with Purpose. Train for Life.",icon:"🏃",pal:3,cat:"body",price:"$0.00",pn:0,desc:"A complete guide to sustainable fitness — cardio, strength training, flexibility, recovery, and movement."},
+{id:4,title:"Sleep & Recovery",tagline:"Rest Deeply. Recover Completely.",icon:"🌙",pal:4,cat:"lifestyle",price:"$0.00",pn:0,desc:"Unlock the power of quality sleep. Covers circadian rhythms, sleep disorders, and optimising recovery."},
+{id:5,title:"Holistic & Natural Healing",tagline:"Heal from Within. Thrive Naturally.",icon:"🌿",pal:5,cat:"lifestyle",price:"$0.00",pn:0,desc:"An integrative exploration of herbal medicine, aromatherapy, Ayurveda, and Traditional Chinese Medicine."},
+{id:6,title:"Gut Health & Digestion",tagline:"Heal Your Gut. Transform Your Health.",icon:"⚗️",pal:3,cat:"nutrition",price:"$0.00",pn:0,desc:"How your gut influences immunity, mood, and total health. Covers the microbiome, leaky gut, and probiotics."},
+{id:7,title:"Women's Health & Hormones",tagline:"Balance Your Hormones. Own Your Vitality.",icon:"🌸",pal:6,cat:"hormones",price:"$0.00",pn:0,desc:"A comprehensive guide to female hormonal health — PCOS, endometriosis, fertility, and menopause."},
+{id:8,title:"Stress & Burnout Recovery",tagline:"Release the Pressure. Restore Your Energy.",icon:"🌊",pal:7,cat:"mind",price:"$0.00",pn:0,desc:"A science-backed guide to recovering from burnout — the nervous system, boundaries, and sustainable rest."},
+{id:9,title:"Healthy Ageing",tagline:"Age with Grace. Live with Vitality.",icon:"🍃",pal:5,cat:"body",price:"$0.00",pn:0,desc:"Evidence-based strategies for ageing well — longevity nutrition, brain health, and muscle preservation."},
+{id:10,title:"The Complete Wellness Lifestyle",tagline:"Integrate Everything. Live Your Best Life.",icon:"⭐",pal:9,cat:"lifestyle",price:"$0.00",pn:0,desc:"The master guide — weaving together nutrition, movement, sleep, relationships, and purpose."},
+{id:11,title:"Heart Health",tagline:"Protect Your Heart. Extend Your Life.",icon:"❤️",pal:6,cat:"body",price:"$0.00",pn:0,desc:"Protect your cardiovascular system — the DASH diet, heart-rate training, and stress management."},
+{id:12,title:"Diabetes Prevention",tagline:"Balance Your Blood Sugar. Reclaim Your Energy.",icon:"⚡",pal:7,cat:"nutrition",price:"$0.00",pn:0,desc:"Preventing and managing type 2 diabetes through blood sugar management and lifestyle medicine."},
+{id:13,title:"Cancer Prevention",tagline:"Reduce Your Risk. Strengthen Your Defences.",icon:"🛡️",pal:2,cat:"body",price:"$0.00",pn:0,desc:"Research-based strategies for reducing cancer risk through diet, exercise, and immune support."},
+{id:14,title:"Immune System Mastery",tagline:"Strengthen Your Defences. Fight Back Naturally.",icon:"🔋",pal:0,cat:"body",price:"$0.00",pn:0,desc:"Optimising your immune system through nutrition, sleep, exercise, and gut health."},
+{id:15,title:"Bone & Joint Health",tagline:"Build Strength from the Inside Out.",icon:"🦴",pal:8,cat:"body",price:"$0.00",pn:0,desc:"Prevent osteoporosis, manage arthritis, and keep joints healthy through nutrition and exercise."},
+{id:16,title:"Brain Health & Cognition",tagline:"Sharpen Your Mind. Future-Proof Your Brain.",icon:"💡",pal:9,cat:"mind",price:"$0.00",pn:0,desc:"Optimise brain performance and protect against decline through the MIND diet, exercise, and sleep."},
+{id:17,title:"Respiratory Health",tagline:"Breathe Better. Live Fully.",icon:"💨",pal:7,cat:"body",price:"$0.00",pn:0,desc:"Lung health, breathing optimisation, and respiratory conditions — from asthma to breathwork."},
+{id:18,title:"Skin Health & Beauty",tagline:"Glow from Within. Nourish Your Skin.",icon:"✨",pal:6,cat:"hormones",price:"$0.00",pn:0,desc:"An inside-out approach to radiant skin — the skin microbiome, nutrition, and hormonal acne."},
+{id:19,title:"Eye Health & Vision",tagline:"See Clearly. Protect Your Sight for Life.",icon:"👁️",pal:4,cat:"body",price:"$0.00",pn:0,desc:"Nutrition for vision, digital eye strain, and age-related conditions."},
+{id:20,title:"Dental & Oral Health",tagline:"A Healthy Mouth. A Healthier Body.",icon:"🦷",pal:1,cat:"body",price:"$0.00",pn:0,desc:"The mouth-body connection, the oral microbiome, and advanced dental hygiene."},
+{id:21,title:"Weight Loss Science",tagline:"Understand Your Body. Lose Weight for Good.",icon:"⚖️",pal:3,cat:"nutrition",price:"$0.00",pn:0,desc:"The science of sustainable weight loss — hormonal regulation and adaptive thermogenesis."},
+{id:22,title:"Chronic Pain Management",tagline:"Break the Pain Cycle. Reclaim Your Life.",icon:"💙",pal:2,cat:"mind",price:"$0.00",pn:0,desc:"Managing chronic pain through movement, mindfulness, nutrition, and evidence-based therapies."},
+{id:23,title:"Men's Health & Vitality",tagline:"Own Your Health. Live with Purpose.",icon:"💪",pal:4,cat:"hormones",price:"$0.00",pn:0,desc:"A guide to men's health — testosterone, prostate health, cardiovascular risk, and mental health."},
+{id:24,title:"Children's Health",tagline:"Raise Healthy Kids. Build Healthy Futures.",icon:"🌟",pal:5,cat:"lifestyle",price:"$0.00",pn:0,desc:"Evidence-based guidance on childhood nutrition, movement, sleep, and mental health."},
+{id:25,title:"Pregnancy & Postnatal Health",tagline:"Nurture Yourself. Welcome New Life.",icon:"🤱",pal:6,cat:"hormones",price:"$0.00",pn:0,desc:"Pregnancy and postnatal care — prenatal nutrition, movement, and mental health."},
+{id:26,title:"Addiction Recovery",tagline:"Break Free. Rebuild Your Life.",icon:"🌅",pal:7,cat:"mind",price:"$0.00",pn:0,desc:"Understanding addiction, navigating recovery, and building a meaningful life."},
+{id:27,title:"Thyroid Health",tagline:"Balance Your Metabolism. Reclaim Your Energy.",icon:"🦋",pal:3,cat:"hormones",price:"$0.00",pn:0,desc:"Hypothyroidism, hyperthyroidism, Hashimoto's, and Graves' disease — a complete guide."},
+{id:28,title:"The Gut Healing Diet",tagline:"Transform Your Gut. Transform Your Life.",icon:"🌱",pal:8,cat:"nutrition",price:"$0.00",pn:0,desc:"A dietary protocol for healing the gut using the 4R Framework."},
+{id:29,title:"Anxiety Mastery",tagline:"Quiet the Noise. Find Your Calm.",icon:"🕊️",pal:2,cat:"mind",price:"$0.00",pn:0,desc:"Overcoming anxiety through CBT, breathwork, nervous system regulation, and lasting calm."},
+{id:30,title:"Emotional Intelligence",tagline:"Master Your Emotions. Elevate Your Life.",icon:"🧡",pal:3,cat:"mind",price:"$0.00",pn:0,desc:"All five components of emotional intelligence for better relationships and mental health."},
+{id:31,title:"Plant-Based Living",tagline:"Eat Plants. Heal Your Body.",icon:"🌾",pal:5,cat:"nutrition",price:"$0.00",pn:0,desc:"Plant-based eating — complete nutrition, meal planning, and athletic performance."},
+{id:32,title:"Fasting & Longevity",tagline:"Reset Your Cells. Extend Your Healthspan.",icon:"⏰",pal:1,cat:"lifestyle",price:"$0.00",pn:0,desc:"Intermittent fasting, autophagy, cellular repair, and longevity science."},
+{id:33,title:"The Microbiome Revolution",tagline:"Trillions of Allies. One Healthy You.",icon:"🔬",pal:0,cat:"nutrition",price:"$0.00",pn:0,desc:"The human microbiome — how to nurture it through diet, lifestyle, and supplementation."},
+{id:34,title:"Posture & Movement",tagline:"Stand Tall. Move Well. Feel Better.",icon:"🏛️",pal:8,cat:"body",price:"$0.00",pn:0,desc:"Correcting posture, functional movement, and eliminating pain through corrective exercises."},
+{id:35,title:"Energy & Fatigue",tagline:"Unlock Limitless Energy. Beat Fatigue for Good.",icon:"☀️",pal:3,cat:"lifestyle",price:"$0.00",pn:0,desc:"Resolving chronic fatigue through mitochondrial support and hormonal optimisation."},
+{id:36,title:"Mindful Living",tagline:"Be Present. Live Intentionally. Thrive.",icon:"🎋",pal:7,cat:"mind",price:"$0.00",pn:0,desc:"Mindfulness in every dimension of daily life — eating, relationships, work, and emotions."},
+{id:37,title:"Sports Nutrition",tagline:"Fuel Performance. Accelerate Recovery.",icon:"🏅",pal:3,cat:"nutrition",price:"$0.00",pn:0,desc:"A complete sports nutrition guide — fuelling, hydration, protein timing, and supplementation."},
+{id:38,title:"Spiritual Wellness",tagline:"Connect to What Matters. Live with Purpose.",icon:"✴️",pal:2,cat:"lifestyle",price:"$0.00",pn:0,desc:"Spirituality's health effects — gratitude, purpose, compassion, and meaning."},
+{id:39,title:"Environmental Health",tagline:"Clean Your World. Protect Your Body.",icon:"🌍",pal:5,cat:"lifestyle",price:"$0.00",pn:0,desc:"Reducing exposure to environmental threats — air, water, endocrine disruptors, and a healthy home."},
+{id:40,title:"Financial Wellness",tagline:"Money Mastery for a Healthier Life.",icon:"💛",pal:8,cat:"lifestyle",price:"$0.00",pn:0,desc:"The connection between financial wellbeing and health — building security and reducing money stress."},
+{id:41,title:"Flexibility & Yoga",tagline:"Bend Without Breaking. Flow with Life.",icon:"🌺",pal:6,cat:"body",price:"$0.00",pn:0,desc:"Flexibility and yoga — fascia, major styles, yoga for pain and mental health."},
+{id:42,title:"High Performance Habits",tagline:"Optimise Your Life. Achieve Your Potential.",icon:"🚀",pal:9,cat:"lifestyle",price:"$0.00",pn:0,desc:"The neuroscience of peak performance — morning routines, deep work, flow states."},
+{id:43,title:"The Gut-Brain Connection",tagline:"Heal Your Gut. Transform Your Mind.",icon:"🧬",pal:8,cat:"mind",price:"$0.00",pn:0,desc:"The gut-brain axis — how gut bacteria produce neurotransmitters and nutritional psychiatry."},
+{id:44,title:"Longevity & Biohacking",tagline:"Hack Your Biology. Live Longer. Live Better.",icon:"🔮",pal:7,cat:"lifestyle",price:"$0.00",pn:0,desc:"Longevity science and biohacking — NAD+, autophagy, wearables, hormesis, and personalised optimisation."},
+{id:45,title:"Trauma & Healing",tagline:"Acknowledge the Wound. Begin the Healing.",icon:"💜",pal:2,cat:"mind",price:"$0.00",pn:0,desc:"Trauma science and healing — EMDR, somatic experiencing, and post-traumatic growth."},
+{id:46,title:"Cooking for Health",tagline:"Transform Your Kitchen. Transform Your Health.",icon:"🍳",pal:3,cat:"nutrition",price:"$0.00",pn:0,desc:"Anti-inflammatory cooking, fermentation, and meal prep for a healing kitchen."},
+{id:47,title:"Perimenopause & Menopause",tagline:"Navigate the Change. Thrive on the Other Side.",icon:"🌙",pal:6,cat:"hormones",price:"$0.00",pn:0,desc:"Perimenopause and menopause — HRT, natural alternatives, and reclaiming vitality."},
+{id:48,title:"Breaking Sugar Addiction",tagline:"Free Yourself from Sugar. Reclaim Your Health.",icon:"🍯",pal:3,cat:"nutrition",price:"$0.00",pn:0,desc:"The neuroscience of sugar addiction and a protocol for reducing sugar and rebuilding health."},
+{id:49,title:"Work-Life Balance",tagline:"Boundaries that Protect. A Life that Fulfils.",icon:"⚖️",pal:7,cat:"lifestyle",price:"$0.00",pn:0,desc:"Work-life harmony through boundary-setting, time management, and energising life design."},
+{id:50,title:"The Complete Body Reset",tagline:"Start Over. Transform Completely. Thrive.",icon:"🔄",pal:9,cat:"lifestyle",price:"$0.00",pn:0,desc:"A comprehensive 30-90 day reset — detoxification, gut healing, hormonal rebalancing."},
 ];
 
 function chapters(b){return[{t:"Introduction: "+b.tagline.split('.')[0],free:true},{t:"Understanding the Foundations"},{t:"The Science Behind It"},{t:"Your Body, Your Blueprint"},{t:"Common Mistakes & How to Fix Them"},{t:"The 7-Day Kickstart Plan"},{t:"Nutrition & Lifestyle Adjustments"},{t:"Mental & Emotional Wellbeing"},{t:"Advanced Strategies"},{t:"Your Lifelong Journey"}];}
@@ -1141,7 +1141,7 @@ function palColor(b,i){return PALETTES[b.pal][i||0];}
 var cb=null,cc=0,purchased=[];
 function owns(id){return true;} // DEMO: all owned
 function _loggedOut(){
-  document.getElementById("navAuth").innerHTML='<div style="background:#B8924A;color:white;padding:6px 16px;border-radius:20px;font-size:0.75rem;font-weight:700;font-family:Poppins,sans-serif;letter-spacing:0.06em;">✦ DEMO — All Books Unlocked</div>';
+  document.getElementById("navAuth").innerHTML='<div style="background:#B8924A;color:white;padding:6px 16px;border-radius:20px;font-size:0.75rem;font-weight:700;font-family:Poppins,sans-serif;letter-spacing:0.06em;">✦ FREE — All Books Unlocked</div>';
   renderBooks();
 }
 function loadPurchases(){renderBooks();}
@@ -1294,8 +1294,8 @@ function filterBks(cat,btn){
 
 // DETAIL
 function detBuyAction(){
-  if(owns(cb.id)){ closeDetail(); openReader(cb.id,0); }
-  else buyBook();
+  closeDetail();
+  openReader(cb.id, 0);
 }
 function openDetail(id){
   var b=BOOKS.find(function(x){return x.id===id;});if(!b)return;
@@ -1322,17 +1322,8 @@ function openDetail(id){
     '<div class="det-include-pill">♾ Lifetime Access</div>';
   // Buttons
   var buyBtn=document.getElementById('detBuyBtn');
-  var previewBtn=document.getElementById('detPreviewBtn');
-  if(o){
-    buyBtn.textContent='📖 Read Now';
-    buyBtn.className='det-buy-btn owned';
-    previewBtn.textContent='⬇ Download';
-    previewBtn.onclick=function(){downloadBook(b.id);};
-  } else {
-    buyBtn.innerHTML='🛒 Buy Now &nbsp;·&nbsp; '+b.price;
-    buyBtn.className='det-buy-btn';
-
-  }
+  buyBtn.textContent='📖 Read Now — Free';
+  buyBtn.className='det-buy-btn owned';
   document.getElementById('detailOv').classList.add('open');
 }
 function closeDetail(){document.getElementById('detailOv').classList.remove('open');}
@@ -1525,10 +1516,9 @@ function renderSidebar(){}
 
 // BUY
 function buyBook(){
-  if(!currentUser){openAuth('signup');showToast('Sign in to purchase');return;}
-  if(!cb)return;
-  var link=STRIPE[cb.pn];
-  if(link){showToast('Redirecting to checkout…');setTimeout(function(){window.location.href=link;},500);}
+  if(!cb) return;
+  closeDetail();
+  openReader(cb.id, 0);
 }
 
 // DOWNLOAD
